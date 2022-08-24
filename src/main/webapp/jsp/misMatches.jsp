@@ -12,8 +12,6 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/matches.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/banner_style.css">
 <title>Lista de Matches</title>
 </head>
 <body>
@@ -28,9 +26,8 @@
 			<div class="d-flex justify-content-evenly">
 				<div class="col-md-6 col-lg-4">
 					<div class="card my-3">
-						<img
-							src="https://picsum.photos/400/280"
-							class="card-image-top" alt="thumbnail">
+						<img src="https://picsum.photos/400/280" class="card-image-top"
+							alt="thumbnail">
 
 						<div class="card-body">
 							<h3 class="card-title text-wrap">Mascota1</h3>
@@ -45,9 +42,8 @@
 
 				<div class="col-md-6 col-lg-4">
 					<div class="card my-3">
-						<img
-							src="https://picsum.photos/400/280"
-							class="card-image-top" alt="thumbnail">
+						<img src="https://picsum.photos/400/280" class="card-image-top"
+							alt="thumbnail">
 
 						<div class="card-body">
 							<h3 class="card-title text-wrap">Mascota2</h3>
@@ -65,9 +61,8 @@
 			<div class="d-flex justify-content-evenly">
 				<div class="col-md-6 col-lg-4">
 					<div class="card my-3">
-						<img
-							src="https://picsum.photos/400/280"
-							class="card-image-top" alt="thumbnail">
+						<img src="https://picsum.photos/400/280" class="card-image-top"
+							alt="thumbnail">
 
 						<div class="card-body">
 							<h3 class="card-title text-wrap">Mascota3</h3>
@@ -82,9 +77,8 @@
 
 				<div class="col-md-6 col-lg-4">
 					<div class="card my-3">
-						<img
-							src="https://picsum.photos/400/280"
-							class="card-image-top" alt="thumbnail">
+						<img src="https://picsum.photos/400/280" class="card-image-top"
+							alt="thumbnail">
 
 						<div class="card-body">
 							<h3 class="card-title text-wrap">Mascota4</h3>
@@ -99,31 +93,6 @@
 			</div>
 		</div>
 
-
-
-
-
-		<!-- div class="d-flex justify-content-evenly m-3 p-4">
-			<div class="d-inline">
-				<img src="https://picsum.photos/400/200" />
-				<div class="text-wrap w-75 p-2">
-					<h3>"Mascota1"</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Etiam purus est, malesuada ut ultrices quis, dictum ac risus.
-						Mauris fringilla vehicula finibus.</p>
-				</div>
-			</div>
-			<div class="d-inline">
-				<img src="https://picsum.photos/400/200" />
-				<div class="text-wrap w-75 p-2">
-					<h3>"Mascota2"</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Etiam purus est, malesuada ut ultrices quis, dictum ac risus.
-						Mauris fringilla vehicula finibus.</p>
-				</div>
-			</div-->
-
-	</div>
 	</div>
 
 </body>
