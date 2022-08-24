@@ -1,0 +1,13 @@
+.navbar-custom {
+	background: rgb(129, 195, 253);
+	min-height: 100%;
+	padding: 30px;
+	width: 100%;
+}
+
+.center-text {
+	padding-left: 6%;
+	padding-right: 15%;
+	margin: auto;
+	vertical-align: middle;
+}
