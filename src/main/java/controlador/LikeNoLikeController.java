@@ -25,9 +25,6 @@ public class LikeNoLikeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//boolean match = Boolean.parseBoolean((String)request.getAttribute("match"));
-		boolean match = Boolean.parseBoolean(request.getParameter("match"));
-		System.out.println(match);
 		procesarSolicitud(request, response);
 	}
 
@@ -37,7 +34,8 @@ public class LikeNoLikeController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//System.out.println(request.getParameter("match"));
+		boolean match = Boolean.parseBoolean(request.getParameter("match"));
+		
 		procesarSolicitud(request, response);
 	}
 
