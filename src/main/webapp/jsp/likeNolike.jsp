@@ -11,9 +11,15 @@
 	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/cards.css">
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/banner_style.css">
 <title>Like No Like</title>
 </head>
 <body>
+	<div><%@include file="../templates/banner_superior.html"%></div>
+	
+
+
 	<div class="tinder">
 		<div class="tinder--status">
 			<i class="fa fa-remove"></i> <i class="fa fa-heart"></i>
