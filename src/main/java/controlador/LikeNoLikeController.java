@@ -35,7 +35,7 @@ public class LikeNoLikeController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		boolean match = Boolean.parseBoolean(request.getParameter("match"));
-		
+		System.out.println(match);
 		procesarSolicitud(request, response);
 	}
 
