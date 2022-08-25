@@ -34,26 +34,6 @@ section {
 	pointer-events: none;
 }
 
-.tinder--status i {
-	font-size: 100px;
-	opacity: 0;
-	transform: scale(0.3);
-	transition: all 0.2s ease-in-out;
-	position: absolute;
-	width: 100px;
-	margin-left: -50px;
-}
-
-.tinder_love .fa-heart {
-	opacity: 0.7;
-	transform: scale(1);
-}
-
-.tinder_nope .fa-remove {
-	opacity: 0.7;
-	transform: scale(1);
-}
-
 .tinder--cards {
 	flex-grow: 0.5;
 	padding-top: 40px;
