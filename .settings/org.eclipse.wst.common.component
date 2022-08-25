@@ -7,6 +7,7 @@
         <property name="context-root" value="MascoTinder_Proyecto"/>
                 
         <property name="java-output-path" value="/MascoTinder_Proyecto/build/classes"/>
+
             
     </wb-module>
     
