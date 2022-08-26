@@ -2,12 +2,31 @@ package modelo.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity(name = "match")
 public class Match implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMatch;
+	
+	//@Column(name = "idmascotapretendiente")
+	@ManyToOne @JoinColumn(name = "idmascotapretendiente", referencedColumnName = "matches")
 	private int idMascotaPretendiente;
+	
+	@ManyToOne @JoinColumn(name = "idmascotapretendida", referencedColumnName = "matches")
+	//@Column(name = "idmascotapretendida")
 	private int idMascotaPretendida;
+	
+	@Column(name = "match")
 	private boolean match;
 	//private Fecha fecha;
 	
