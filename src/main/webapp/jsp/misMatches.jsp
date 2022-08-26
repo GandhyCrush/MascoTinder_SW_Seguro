@@ -10,15 +10,13 @@
 	rel="stylesheet"
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/matches.css">
 <title>Lista de Matches</title>
 </head>
 <body>
 
 	<%@include file="../templates/banner_superior.html"%>
 
-	<div class="screen-margin">
+	<div style="margin: 60px 150px;">
 		<h1 class="display-6 text-muted">
 			<strong>Matches para "Mascota"</strong>
 		</h1>
