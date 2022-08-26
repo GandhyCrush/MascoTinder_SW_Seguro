@@ -19,12 +19,12 @@ public class Match implements Serializable{
 	private int idMatch;
 	
 	//@Column(name = "idmascotapretendiente")
-	@ManyToOne @JoinColumn(name = "idmascotapretendiente", referencedColumnName = "matches")
-	private int idMascotaPretendiente;
+	//@ManyToOne @JoinColumn(name = "idmascotapretendiente", referencedColumnName = "matches")
+	//private int idMascotaPretendiente;
 	
-	@ManyToOne @JoinColumn(name = "idmascotapretendida", referencedColumnName = "matches")
+	//@ManyToOne @JoinColumn(name = "idmascotapretendida", referencedColumnName = "matches")
 	//@Column(name = "idmascotapretendida")
-	private int idMascotaPretendida;
+	//private int idMascotaPretendida;
 	
 	@Column(name = "match")
 	private boolean match;

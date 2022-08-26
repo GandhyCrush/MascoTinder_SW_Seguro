@@ -16,16 +16,22 @@ public class Preferencias implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPreferencias;
+	
 	@Column(name = "especie")
 	private Especie especie;
+	
 	@Column(name = "sexo")
 	private Sexo sexo;
+	
 	@Column(name = "edadMinima")
 	private int edadMinima;
+	
 	@Column(name = "edadMaxima")
 	private int edadMaxima;
+	
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Mascota mascota;
+	
 	public Preferencias() {
 		
 	}
