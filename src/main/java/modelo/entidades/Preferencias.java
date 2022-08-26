@@ -2,14 +2,35 @@ package modelo.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+@Entity(name = "preferencias")
 public class Preferencias implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPreferencias;
+	
+	@Column(name = "especie")
 	private Especie especie;
+	
+	@Column(name = "sexo")
 	private Sexo sexo;
+	
+	@Column(name = "edadMinima")
 	private int edadMinima;
+	
+	@Column(name = "edadMaxima")
 	private int edadMaxima;
+	
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private Mascota mascota;
 	
 	public Preferencias() {
 		

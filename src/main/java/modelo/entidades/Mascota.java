@@ -3,18 +3,48 @@ package modelo.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+@Entity(name = "mascota")
 public class Mascota implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMascota;
+	
+	@Column(name ="nombre")
 	private String nombre;
+	
+	@Column(name ="descripcion")
 	private String descripcion;
+	
+	@Column(name ="especie")
 	private Especie especie;
+	
+	@Column(name ="sexo")
 	private Sexo sexo;
+	
+	@Column(name ="edad")
 	private int edad;
+	
+	//claves foraneas
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mascota")
 	private List<Foto> fotos;
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
 	private Preferencias preferencias;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Persona propietario;
+	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//private List<Match> matches;
 	
 	public Mascota() {
 		

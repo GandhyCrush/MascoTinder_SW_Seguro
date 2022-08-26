@@ -2,12 +2,29 @@ package modelo.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity(name = "matchTable")
 public class Match implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMatch;
-	private int idMascotaPretendiente;
-	private int idMascotaPretendida;
+	
+	@ManyToOne @JoinColumn(name = "idmascotapretendiente", referencedColumnName = "idmascota")
+	private Mascota mascotaPretendiente;
+	
+	@ManyToOne @JoinColumn(name = "mascotapretendida", referencedColumnName = "idmascota")
+	private Mascota mascotaPretendida;
+	
+	@Column(name = "isMatch")
 	private boolean match;
 	//private Fecha fecha;
 	
@@ -15,9 +32,9 @@ public class Match implements Serializable{
 		
 	}
 	
-	public Match(int idMascotaPretendiente, int idMascotaPretendida, boolean match) {
-		this.idMascotaPretendiente = idMascotaPretendiente;
-		this.idMascotaPretendida = idMascotaPretendida;
+	public Match(Mascota mascotaPretendiente, Mascota idMascotaPretendida, boolean match) {
+		this.mascotaPretendiente = mascotaPretendiente;
+		this.mascotaPretendida = idMascotaPretendida;
 		this.match = match;
 	}
 
@@ -25,21 +42,7 @@ public class Match implements Serializable{
 		return idMatch;
 	}
 	
-	public int getIdMascotaPretendiente() {
-		return idMascotaPretendiente;
-	}
 
-	public void setIdMascotaPretendiente(int idMascotaPretendiente) {
-		this.idMascotaPretendiente = idMascotaPretendiente;
-	}
-
-	public int getIdMascotaPretendida() {
-		return idMascotaPretendida;
-	}
-
-	public void setIdMascotaPretendida(int idMascotaPretendida) {
-		this.idMascotaPretendida = idMascotaPretendida;
-	}
 
 	public boolean isMatch() {
 		return match;
@@ -49,11 +52,7 @@ public class Match implements Serializable{
 		this.match = match;
 	}
 
-	@Override
-	public String toString() {
-		return "Match [idMascotaPretendiente=" + idMascotaPretendiente + ", idMascotaPretendida=" + idMascotaPretendida
-				+ ", match=" + match + "]";
-	}
+
 	
 	
 }
