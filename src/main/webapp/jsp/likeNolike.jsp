@@ -46,23 +46,23 @@
 						</div>
 						<div class="carousel-inner">
 							<div class="carousel-item  active" data-bs-interval="100000000">
-								<img src="./imgs/Atom1.jpg">
+								<img src="../imgs/Atom1.jpg">
 							</div>
 							<div class="carousel-item" data-bs-interval="100000000">
-								<img src="./imgs/Atom1.jpg">
+								<img src="../imgs/Atom2.jpg">
 							</div>
 							<div class="carousel-item" data-bs-interval="100000000">
-								<img src="./imgs/Atom1.jpg">
+								<img src="../imgs/Atom3.jpg">
 							</div>
 						</div>
 					</div>
 					<button class="carousel-control-prev" type="button"
-						data-bs-target="#c1" data-bs-slide="prev">
+						data-bs-target="#m1" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 						<span class="visually-hidden">Previous</span>
 					</button>
 					<button class="carousel-control-next" type="button"
-						data-bs-target="#c1" data-bs-slide="next">
+						data-bs-target="#m1" data-bs-slide="next">
 						<span class="carousel-control-next-icon" aria-hidden="true"></span>
 						<span class="visually-hidden">Next</span>
 					</button>

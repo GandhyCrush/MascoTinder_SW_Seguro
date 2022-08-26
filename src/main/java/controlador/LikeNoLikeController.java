@@ -35,11 +35,11 @@ public class LikeNoLikeController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		boolean like = Boolean.parseBoolean(request.getParameter("like"));
+		boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
 		int idSession = 0;
-		String idLike = request.getParameter("idCard").toString().split("mid")[1];
+		int idLike = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
 		//DAOFactory.getFactory().getMatchDAO().isMatch(idSession, idLike);
-		System.out.println(like+"---------"+idLike);
+		//System.out.println(isLike+"---------"+idLike);
 		procesarSolicitud(request, response);
 	}
 
@@ -47,9 +47,9 @@ public class LikeNoLikeController extends HttpServlet {
 			throws ServletException, IOException {
 		// Obtener Parametros
 		// Hablar con el modelo
-		Preferencias preferencias = new Preferencias();
-		
+		Preferencias preferencias = new Preferencias();		
 		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
+		System.out.println(mascotas);
 		// Envio a la vista
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);

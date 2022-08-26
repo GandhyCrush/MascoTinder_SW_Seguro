@@ -118,3 +118,7 @@ section {
 .fa-remove {
 	color: #CDD6DD;
 }
+
+.misMascotas{
+	display: grid;
+}
