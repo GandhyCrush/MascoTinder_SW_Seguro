@@ -35,10 +35,11 @@ public class LikeNoLikeController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		boolean match = Boolean.parseBoolean(request.getParameter("like"));
+		boolean like = Boolean.parseBoolean(request.getParameter("like"));
 		int idSession = 0;
-		//int idLike = Integer.parseInt(request.getParameter("idlike"));
+		String idLike = request.getParameter("idCard").toString().split("mid")[1];
 		//DAOFactory.getFactory().getMatchDAO().isMatch(idSession, idLike);
+		System.out.println(like+"---------"+idLike);
 		procesarSolicitud(request, response);
 	}
 

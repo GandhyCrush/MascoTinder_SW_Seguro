@@ -33,15 +33,15 @@
 		<div class="tinder">
 
 			<div class="tinder--cards">
-				<div class="tinder--card">
-					<div id="c1" class="carousel slide" data-bs-ride="carousel">
+				<div id="mid1" class="tinder--card">
+					<div id="m1" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#c1"
+							<button type="button" data-bs-target="#m1"
 								data-bs-slide-to="0" class="active" aria-current="true"
 								aria-label="Slide 1"></button>
-							<button type="button" data-bs-target="#c1"
+							<button type="button" data-bs-target="#m1"
 								data-bs-slide-to="1" aria-label="Slide 2"></button>
-							<button type="button" data-bs-target="#c1"
+							<button type="button" data-bs-target="#m1"
 								data-bs-slide-to="2" aria-label="Slide 3"></button>
 						</div>
 						<div class="carousel-inner">
@@ -70,15 +70,15 @@
 					<p>dfgdfgdfg</p>
 				</div>
 				<c:forEach items="${mascotas}" var="m">
-					<div class="tinder--card">
-						<div id="${m.id}" class="carousel slide" data-bs-ride="carousel">
+					<div id="mid${m.id}" class="tinder--card">
+						<div id="m${m.id}" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-indicators">
-								<button type="button" data-bs-target="#${m.id}"
+								<button type="button" data-bs-target="#m${m.id}"
 									data-bs-slide-to="0" class="active" aria-current="true"
 									aria-label="Slide 1"></button>
-								<button type="button" data-bs-target="#${m.id}"
+								<button type="button" data-bs-target="#m${m.id}"
 									data-bs-slide-to="1" aria-label="Slide 2"></button>
-								<button type="button" data-bs-target="#${m.id}"
+								<button type="button" data-bs-target="#m${m.id}"
 									data-bs-slide-to="2" aria-label="Slide 3"></button>
 							</div>
 							<div class="carousel-inner">
@@ -94,12 +94,12 @@
 							</div>
 						</div>
 						<button class="carousel-control-prev" type="button"
-							data-bs-target="#${m.id}" data-bs-slide="prev">
+							data-bs-target="#m${m.id}" data-bs-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="visually-hidden">Previous</span>
 						</button>
 						<button class="carousel-control-next" type="button"
-							data-bs-target="#${m.id}" data-bs-slide="next">
+							data-bs-target="#m${m.id}" data-bs-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="visually-hidden">Next</span>
 						</button>
@@ -131,12 +131,11 @@
 		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 		crossorigin="anonymous"></script>
 	<script>
-		'use strict';
-
 		var tinderContainer = document.querySelector('.tinder');
 		var allCards = document.querySelectorAll('.tinder--card');
 		var nope = document.getElementById('nope');
 		var love = document.getElementById('love');
+		var url = './LikeNoLikeController?idCard=';
 
 		function initCards(card, index) {
 			var newCards = document
@@ -162,7 +161,8 @@
 					return false;
 
 				var card = cards[0];
-
+				console.log(card);
+				getIdCard(card.id);
 				card.classList.add('removed');
 
 				if (love) {
@@ -172,28 +172,28 @@
 					card.style.transform = 'translate(-' + moveOutWidth
 							+ 'px, -100px) rotate(30deg)';
 				}
-				isLike(love);
+				sendLike(love);
 				initCards();
 
 				event.preventDefault();
 			};
 		}
-		function isLike(like) {
+		function sendLike(like) {
 
 			const http = new XMLHttpRequest();
-			const url = './LikeNoLikeController?like=' + like;
+			url += '&like='+like;
 			http.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					/*var id = document.querySelectorAll(
-							'.tinder--card:not(.removed)').item(0).id;
-					url += '&idLike=' + id;*/
-
+					//console.log('exito');
 				}
 			}
 			http.open('POST', url, true);
 			http.send();
 
 			
+		}
+		function getIdCard(cardId) {
+			url += cardId;
 		}
 
 		var nopeListener = createButtonListener(false);
