@@ -18,7 +18,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item ps-5 h4"><a
-						class="nav-link active text-white" aria-current="page" href="#">Mis
+						class="nav-link active text-white" aria-current="page" href="MisMascotasController">Mis
 							Mascotas</a></li>
 				</ul>
 				<ul class="navbar-nav mb-2 mb-lg-0">
@@ -26,9 +26,9 @@
 						src="https://img.icons8.com/ios-glyphs/50/FFFFFF/user--v1.png" />
 					</li>
 					<li class="navbar-text center-text"><span
-						class="text-white h5">"Usuario"</span></li>
+						class="text-white h5">${sessionScope.usuarioLogeado.getNombre()}</span></li>
 					<li class="nav-item h5 center-text pe-5"><a
-						class="nav-link active text-white" aria-current="page" href="#">Salir</a>
+						class="nav-link active text-white" aria-current="page" href="LogoutController">Salir</a>
 					</li>
 				</ul>
 			</div>
