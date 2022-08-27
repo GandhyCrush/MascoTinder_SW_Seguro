@@ -44,7 +44,7 @@ public class LikeNoLikeController extends HttpServlet {
 			DAOFactory.getFactory().getMatchDAO().createMatch(idMiMascota, idPretendido);
 			request.setAttribute("match","");
 		}else {
-			request.setAttribute("match","matchMsg");
+			request.setAttribute("match","tinder_love");
 		}
 		procesarSolicitud(request, response);
 	}

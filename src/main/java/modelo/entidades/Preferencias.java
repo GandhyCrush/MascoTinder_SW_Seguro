@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,9 +20,11 @@ public class Preferencias implements Serializable{
 	private int idPreferencias;
 	
 	@Column(name = "especie")
+	@Enumerated(EnumType.STRING)
 	private Especie especie;
 	
 	@Column(name = "sexo")
+	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	
 	@Column(name = "edadMinima")
