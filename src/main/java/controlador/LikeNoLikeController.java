@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.conexion.Mascota;
-import modelo.conexion.MascotaDAO;
+import modelo.dao.DAOFactory;
+import modelo.entidades.Mascota;
+import modelo.entidades.Preferencias;
 
 /**
  * Servlet implementation class LikeNoLikeController
@@ -25,9 +26,6 @@ public class LikeNoLikeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//boolean match = Boolean.parseBoolean((String)request.getAttribute("match"));
-		boolean match = Boolean.parseBoolean(request.getParameter("match"));
-		System.out.println(match);
 		procesarSolicitud(request, response);
 	}
 
@@ -37,7 +35,11 @@ public class LikeNoLikeController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//System.out.println(request.getParameter("match"));
+		boolean like = Boolean.parseBoolean(request.getParameter("like"));
+		int idSession = 0;
+		String idLike = request.getParameter("idCard").toString().split("mid")[1];
+		//DAOFactory.getFactory().getMatchDAO().isMatch(idSession, idLike);
+		System.out.println(like+"---------"+idLike);
 		procesarSolicitud(request, response);
 	}
 
@@ -45,8 +47,9 @@ public class LikeNoLikeController extends HttpServlet {
 			throws ServletException, IOException {
 		// Obtener Parametros
 		// Hablar con el modelo
-		MascotaDAO mascotaModelo = new MascotaDAO();
-		List<Mascota> mascotas = mascotaModelo.getMascotas();
+		Preferencias preferencias = new Preferencias();
+		
+		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
 		// Envio a la vista
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);
