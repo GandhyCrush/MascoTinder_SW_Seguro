@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,10 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.modelo.JDBCImplementacionesDAO.PersonaDAO_ANTES;
-
-import modelo.Persona;
+import modelo.JPADAO.JPAMatchDAO;
+import modelo.entidades.Mascota;
 
 @WebServlet("/MisMatchesController")
 public class MisMatchesController extends HttpServlet {
@@ -23,25 +22,22 @@ public class MisMatchesController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//getMatches(request, response);
+
+		// Llamar al modelo
+		int idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
+		System.out.println(idMiMascota);
+		JPAMatchDAO misMatches = new JPAMatchDAO();
+		List<Mascota> matches = misMatches.getMatches(idMiMascota);
+
+		// Llamar a la vista
+		request.setAttribute("matches", matches);
+		request.getRequestDispatcher("/jsp/misMatches.jsp").forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	}
-
-	private void getMatches(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		// Llamar al modelo
-		MascotaDAO mascotaModelo = new MascotaDAO();
-		Mascota miMascota = mascotaModelo.getMascota();
-		List<Mascota> matches = miMascota.getMatches();
-
-		// Llamar a la vista
-		request.setAttribute("matches", matches);
-		request.getRequestDispatcher("/jsp/misMatches.jsp").forward(request, response);
 	}
 
 }
