@@ -14,24 +14,22 @@ public class JPAMatchDAO extends JPAGenericDAO<Match, Integer> implements MatchD
 		super(Match.class);
 	}
 	
-	public boolean isMatch(int idMascotaPretendiente, int idMiMascota) {
-		/*String sentenciaSQL = "SELECT * from matchtable m where m.mascotapretendiente = (?) and "
-				+ "m.mascotapretendida_idmascota = (?)";
-		Query consultaNativa = em.createNativeQuery(sentenciaSQL, Mascota.class);
-		consultaNativa.setParameter(1, idMascotaObjetivo);
-		consultaNativa.setParameter(2, idMiMascota);*/
+	public Match isMatch(int idMascotaPretendiente, int idMiMascota) {
 		
-		
-		String sentenceJPQL = "SELECT m from matchTable m WHERE m.mascotaPretendida.idMascota= :idMiMascota and "
-				+ "m.mascotaPretendiente.idMascota= :idMascotaPretendiente";
+		Match resultado = null;
+		String sentenceJPQL = "SELECT m from matchTable m WHERE m.mascotaPretendiente.idMascota= :idMiMascota and "
+				+ "m.mascotaPretendida.idMascota= :idMascotaPretendiente";
 
 		Query query = this.em.createQuery(sentenceJPQL);
 		query.setParameter("idMiMascota", idMiMascota);
 		query.setParameter("idMascotaPretendiente", idMascotaPretendiente);
 		@SuppressWarnings("unchecked")
-		List<Mascota> resultado = query.getResultList();
-
-		return resultado.size() != 0;
+		List<Match> queryResult = query.getResultList();
+		if (queryResult.size() != 0) {
+			resultado = queryResult.get(0);
+		} 
+		
+		return resultado;
 	}
 
 	public void createMatch(int idMiMascota, int idMascotaPretendiente) {
@@ -46,10 +44,7 @@ public class JPAMatchDAO extends JPAGenericDAO<Match, Integer> implements MatchD
 		Mascota miPretendiente = (Mascota) miPretendienteQuery.getSingleResult();		
 		
 		Match newMatch = new Match(miPretendiente, miMascota, false);
-		System.out.println(newMatch);
-		em.getTransaction().begin();
-		em.persist(newMatch);
-		em.getTransaction().commit();
+		super.create(newMatch);
 	}
 
 	public List<Mascota> getMatches(int idMiMascota) {

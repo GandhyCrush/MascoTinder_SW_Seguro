@@ -17,7 +17,7 @@
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/cards.css">
+	href="${pageContext.request.contextPath}/css/likeNoLike.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/banner_style.css">
 <title>Like No Like</title>
@@ -31,8 +31,9 @@
 	<section>
 
 		<div class="tinder">
-			<div class="tinder--status <c:if test="${match}">tinder_love</c:if>  ">
-			
+			<div
+				class="tinder--status <c:if test="${match}">tinder_love</c:if>  ">
+
 				<i class="fa fa-heart"></i>
 			</div>
 
@@ -85,6 +86,16 @@
 						</p>
 					</div>
 				</c:forEach>
+				<div id="mid0" class="tinder--card">
+
+					<h3>Oops!</h3>
+					<a class="msg" href="${pageContext.request.contextPath}/PreferenciasController"> <span>Se acabaron tus Pretendientes <br>
+							Intenta actualizando tus Preferencias
+					</span>
+					</a>
+
+
+				</div>
 			</div>
 
 			<div class="tinder--buttons">
@@ -113,7 +124,7 @@
 		var allCards = document.querySelectorAll('.tinder--card');
 		var nope = document.getElementById('nope');
 		var love = document.getElementById('love');
-		var url = './LikeNoLikeController?idCard=';
+		var url ;
 
 		function initCards(card, index) {
 			var newCards = document
@@ -139,7 +150,6 @@
 					return false;
 
 				var card = cards[0];
-				console.log(card);
 				getIdCard(card.id);
 				card.classList.add('removed');
 
@@ -157,7 +167,7 @@
 			};
 		}
 		function sendLike(like) {
-
+			console.log(like);
 			const http = new XMLHttpRequest();
 			url += '&like=' + like;
 			http.onreadystatechange = function() {
@@ -170,6 +180,7 @@
 
 		}
 		function getIdCard(cardId) {
+			url = './LikeNoLikeController?idCard=';
 			url += cardId;
 		}
 

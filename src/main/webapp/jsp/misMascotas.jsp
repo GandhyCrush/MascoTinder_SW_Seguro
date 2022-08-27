@@ -20,6 +20,8 @@
 	href="${pageContext.request.contextPath}/css/misMascotasStyles.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/banner_style.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <title>Mis Mascotas</title>
 </head>
 
@@ -76,7 +78,9 @@
 				</div>
 			</c:forEach>
 		</div>
-
+	<a class="float-btn" href="${pageContext.request.contextPath}/RegistrarMascotaController">
+	<span class="material-icons ">add</span>
+	</a>
 
 	</section>
 

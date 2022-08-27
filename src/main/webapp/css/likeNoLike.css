@@ -136,3 +136,13 @@ section {
 .fa-remove {
 	color: #808080;
 }
+.msg{
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	font-size: 30px;
+	color: #58AAE8;
+	
+}

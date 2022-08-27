@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "matchTable")
 public class Match implements Serializable{
+
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -54,7 +56,11 @@ public class Match implements Serializable{
 	public void setMatch(boolean match) {
 		this.match = match;
 	}
-
+	@Override
+	public String toString() {
+		return "Match [idMatch=" + idMatch + ", mascotaPretendiente=" + mascotaPretendiente + ", mascotaPretendida="
+				+ mascotaPretendida + ", match=" + match + "]";
+	}
 
 	
 	
