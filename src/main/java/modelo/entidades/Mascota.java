@@ -30,6 +30,7 @@ public class Mascota implements Serializable{
 	
 	@Column(name ="descripcion")
 	private String descripcion;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name ="especie")
 	private Especie especie;
