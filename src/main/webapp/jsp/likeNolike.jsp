@@ -32,7 +32,7 @@
 
 		<div class="tinder">
 			<div class="tinder--status">
-				<i class="fa fa-remove"></i> <i class="fa fa-heart"></i>
+				<i class="fa fa-remove ${match}"></i>
 			</div>
 			<div class="tinder--cards">
 				<c:forEach items="${mascotas}" var="m">
