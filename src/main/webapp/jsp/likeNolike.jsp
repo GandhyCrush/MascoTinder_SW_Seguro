@@ -31,44 +31,10 @@
 	<section>
 
 		<div class="tinder">
-
+			<div class="tinder--status">
+				<i class="fa fa-remove"></i> <i class="fa fa-heart"></i>
+			</div>
 			<div class="tinder--cards">
-				<div id="mid1" class="tinder--card">
-					<div id="m1" class="carousel slide" data-bs-ride="carousel">
-						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#m1"
-								data-bs-slide-to="0" class="active" aria-current="true"
-								aria-label="Slide 1"></button>
-							<button type="button" data-bs-target="#m1"
-								data-bs-slide-to="1" aria-label="Slide 2"></button>
-							<button type="button" data-bs-target="#m1"
-								data-bs-slide-to="2" aria-label="Slide 3"></button>
-						</div>
-						<div class="carousel-inner">
-							<div class="carousel-item  active" data-bs-interval="100000000">
-								<img src="../imgs/Atom1.jpg">
-							</div>
-							<div class="carousel-item" data-bs-interval="100000000">
-								<img src="../imgs/Atom2.jpg">
-							</div>
-							<div class="carousel-item" data-bs-interval="100000000">
-								<img src="../imgs/Atom3.jpg">
-							</div>
-						</div>
-					</div>
-					<button class="carousel-control-prev" type="button"
-						data-bs-target="#m1" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button"
-						data-bs-target="#m1" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-					<h3>dffgdfg</h3>
-					<p>dfgdfgdfg</p>
-				</div>
 				<c:forEach items="${mascotas}" var="m">
 					<div id="mid${m.id}" class="tinder--card">
 						<div id="m${m.id}" class="carousel slide" data-bs-ride="carousel">
@@ -81,6 +47,16 @@
 								<button type="button" data-bs-target="#m${m.id}"
 									data-bs-slide-to="2" aria-label="Slide 3"></button>
 							</div>
+							<button class="carousel-control-prev" type="button"
+								data-bs-target="#m${m.id}" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button"
+								data-bs-target="#m${m.id}" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
 							<div class="carousel-inner">
 								<div class="carousel-item  active" data-bs-interval="100000000">
 									<img src="${m.rutaImg}">
@@ -93,16 +69,7 @@
 								</div>
 							</div>
 						</div>
-						<button class="carousel-control-prev" type="button"
-							data-bs-target="#m${m.id}" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button"
-							data-bs-target="#m${m.id}" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button>
+
 						<h3>${m.nombre}</h3>
 						<p>${m.descripcion}</p>
 					</div>
@@ -181,7 +148,7 @@
 		function sendLike(like) {
 
 			const http = new XMLHttpRequest();
-			url += '&like='+like;
+			url += '&like=' + like;
 			http.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					//console.log('exito');
@@ -190,7 +157,6 @@
 			http.open('POST', url, true);
 			http.send();
 
-			
 		}
 		function getIdCard(cardId) {
 			url += cardId;

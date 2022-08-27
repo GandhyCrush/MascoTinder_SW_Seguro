@@ -5,18 +5,20 @@
 }
 
 section {
+	text-align: center;
 	font-family: sans-serif;
+
 }
 
 .tinder--card {
-	display: inline-block;
-	width: 90vw;
-	max-width: 400px;
-	/*height: 70vh;*/
-	max-height: 400px;
+	margin:  20px auto auto auto;
+	display: block;
+	overflow: hidden;
+	width: 333px;
 	background: #C4DEF2;
 	padding-bottom: 40px;
 	border-radius: 8px;
+	box-shadow: rgba(0, 0, 0, 0.35) 1.95px 1.95px 2.6px;
 }
 
 .tinder--card img {
@@ -26,14 +28,14 @@ section {
 }
 
 .tinder--card h3 {
-	margin-top: 32px;
+	margin-top: 10px;
 	font-size: 32px;
 	padding: 0 16px;
 	pointer-events: none;
 }
 
 .tinder--card p {
-	margin-top: 24px;
+	margin: 0px;
 	font-size: 15px;
 	padding: 0 16px;
 	pointer-events: none;
@@ -41,4 +43,7 @@ section {
 
 .misMascotas{
 	display: grid;
+	place-content: center;
+	grid-template-columns: repeat(auto-fill, minmax(25rem,1fr));
+	gap: 8px;
 }

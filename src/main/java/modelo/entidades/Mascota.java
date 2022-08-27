@@ -1,15 +1,19 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -26,25 +30,26 @@ public class Mascota implements Serializable{
 	
 	@Column(name ="descripcion")
 	private String descripcion;
-	
+	@Enumerated(EnumType.STRING)
 	@Column(name ="especie")
 	private Especie especie;
 	
 	@Column(name ="sexo")
+	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	
 	@Column(name ="edad")
 	private int edad;
 	
 	//claves foraneas
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mascota")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
 	private List<Foto> fotos;
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
 	private Preferencias preferencias;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Persona propietario;
-	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	//private List<Match> matches;
+	@OneToMany(mappedBy = "mascotaPretendida")
+	private List<Match> matches;
 	
 	public Mascota() {
 		
@@ -57,6 +62,7 @@ public class Mascota implements Serializable{
 		this.sexo = sexo;
 		this.edad = edad;
 		this.propietario = propietario;
+		this.fotos = new ArrayList<Foto>();
 	}
 
 	public int getIdMascota() {
@@ -117,7 +123,7 @@ public class Mascota implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Mascota: " + this.nombre + "(" + this.especie + ")";
+		return "Mascota: " + this.nombre + "(" + this.especie + ")"+ this.fotos;
 	}
 	
 	

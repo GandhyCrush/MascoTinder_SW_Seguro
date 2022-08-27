@@ -47,7 +47,7 @@ section {
 .tinder--card {
 	display: inline-block;
 	width: 90vw;
-	max-width: 400px;
+	max-width: 333px;
 	height: 70vh;
 	max-height: 400px;
 	background: #C4DEF2;

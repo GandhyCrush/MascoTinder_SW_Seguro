@@ -7,4 +7,5 @@ import modelo.entidades.Preferencias;
 
 public interface MascotaDAO extends GenericDAO<Mascota, Integer>{
 	public List<Mascota> getMascotas(Preferencias preferencias);
+	public List<Mascota> getMisMascotas(int idPropietario);
 }
