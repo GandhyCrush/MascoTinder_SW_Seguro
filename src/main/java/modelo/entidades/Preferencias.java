@@ -19,12 +19,12 @@ public class Preferencias implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPreferencias;
 	
-	@Enumerated(EnumType.STRING)
+
 	@Column(name = "especie")
 	@Enumerated(EnumType.STRING)
 	private Especie especie;
 	
-	@Enumerated(EnumType.STRING)
+
 	@Column(name = "sexo")
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
