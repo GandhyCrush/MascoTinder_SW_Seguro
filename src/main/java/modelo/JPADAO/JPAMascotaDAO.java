@@ -12,35 +12,42 @@ import modelo.entidades.Mascota;
 import modelo.entidades.Preferencias;
 
 public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements MascotaDAO {
-	
+
 	public JPAMascotaDAO() {
 		super(Mascota.class);
 	}
 
-	private EntityManager em =  Persistence.createEntityManagerFactory("MascoTinder_Proyecto").createEntityManager();
-	
-	
-	
+	private EntityManager em = Persistence.createEntityManagerFactory("MascoTinder_Proyecto").createEntityManager();
+
 	public List<Mascota> getMascotas(Preferencias preferencias) {
-		String sentenciaSQL = "SELECT * FROM Mascota m where m.especie = (?) and "
-				+ "m.edad >= (?) and "
-				+ "m.edad <= (?) and "
-				+ "m.sexo = (?)";
-		Query consultaNativa = em.createNativeQuery(sentenciaSQL, Mascota.class);
-		consultaNativa.setParameter(1, preferencias.getEspecie());
-		consultaNativa.setParameter(2, preferencias.getEdadMinima());
-		consultaNativa.setParameter(3, preferencias.getEdadMaxima());
-		consultaNativa.setParameter(4, preferencias.getSexo());
-		 
-		return consultaNativa.getResultList() ;
+
+		String sentenceJPQL = "SELECT m from mascota m WHERE "
+				+ "m.especie = :par_especie and "
+				+ "m.edad >= :par_edadMin and " 
+				+ "m.edad <= :par_edadMax and " 
+				+ "m.sexo = :par_sexo";
+
+		Query query = this.em.createQuery(sentenceJPQL);
+		query.setParameter("par_especie", preferencias.getEspecie());
+		query.setParameter("par_edadMin", preferencias.getEdadMinima());
+		query.setParameter("par_edadMax", preferencias.getEdadMaxima());
+		query.setParameter("par_sexo", preferencias.getSexo());
+		@SuppressWarnings("unchecked")
+		List<Mascota> resultado = query.getResultList();
+
+		return resultado;
 	}
 
 	public List<Mascota> getMisMascotas(int idPropietario) {
-		String sentenciaSQL = "SELECT * FROM Mascota m where m.PROPIETARIO_IDPERSONA = (?)";
-		Query consultaNativa = em.createNativeQuery(sentenciaSQL, Mascota.class);
-		consultaNativa.setParameter(1, idPropietario);
-		 
-		return consultaNativa.getResultList();
+
+		String sentenceJPQL = "SELECT m from mascota m WHERE m.propietario.idPersona= :idPropietario";
+
+		Query query = this.em.createQuery(sentenceJPQL);
+		query.setParameter("idPropietario", idPropietario);
+		@SuppressWarnings("unchecked")
+		List<Mascota> resultado = query.getResultList();
+
+		return resultado;
 	}
 
 }

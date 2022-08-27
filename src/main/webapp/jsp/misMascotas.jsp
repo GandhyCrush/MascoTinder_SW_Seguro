@@ -17,7 +17,7 @@
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/misMascotas.css">
+	href="${pageContext.request.contextPath}/css/misMascotasStyles.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/banner_style.css">
 <title>Mis Mascotas</title>
@@ -71,6 +71,8 @@
 					<p> <span class="negrilla">Sexo:</span>  ${m.sexo}</p>
 					<p><span class="negrilla">Edad:</span> ${m.edad}</p>
 					<p><span class="negrilla">Dueño:</span> ${m.propietario}</p>
+					<span ><a class="custom-btn btn-16" href="${pageContext.request.contextPath}/MisMatchesController">Mis Matches</a></span>
+					<span ><a class="custom-btn btn-16" href="${pageContext.request.contextPath}/PreferenciasController">Preferencias</a></span>
 				</div>
 			</c:forEach>
 		</div>

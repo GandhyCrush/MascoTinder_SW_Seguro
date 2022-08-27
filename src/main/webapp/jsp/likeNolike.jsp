@@ -31,47 +31,58 @@
 	<section>
 
 		<div class="tinder">
-			<div class="tinder--status">
-				<i class="fa fa-remove ${match}"></i>
+			<div class="tinder--status <c:if test="${match}">tinder_love</c:if>  ">
+			
+				<i class="fa fa-heart"></i>
 			</div>
+
 			<div class="tinder--cards">
 				<c:forEach items="${mascotas}" var="m">
-					<div id="mid${m.id}" class="tinder--card">
-						<div id="m${m.id}" class="carousel slide" data-bs-ride="carousel">
+					<div id="mid${m.idMascota}" class="tinder--card">
+						<div id="m${m.idMascota}" class="carousel slide"
+							data-bs-ride="carousel">
 							<div class="carousel-indicators">
-								<button type="button" data-bs-target="#m${m.id}"
+								<button type="button" data-bs-target="#m${m.idMascota}"
 									data-bs-slide-to="0" class="active" aria-current="true"
 									aria-label="Slide 1"></button>
-								<button type="button" data-bs-target="#m${m.id}"
+								<button type="button" data-bs-target="#m${m.idMascota}"
 									data-bs-slide-to="1" aria-label="Slide 2"></button>
-								<button type="button" data-bs-target="#m${m.id}"
+								<button type="button" data-bs-target="#m${m.idMascota}"
 									data-bs-slide-to="2" aria-label="Slide 3"></button>
 							</div>
 							<button class="carousel-control-prev" type="button"
-								data-bs-target="#m${m.id}" data-bs-slide="prev">
+								data-bs-target="#m${m.idMascota}" data-bs-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 								<span class="visually-hidden">Previous</span>
 							</button>
 							<button class="carousel-control-next" type="button"
-								data-bs-target="#m${m.id}" data-bs-slide="next">
+								data-bs-target="#m${m.idMascota}" data-bs-slide="next">
 								<span class="carousel-control-next-icon" aria-hidden="true"></span>
 								<span class="visually-hidden">Next</span>
 							</button>
 							<div class="carousel-inner">
 								<div class="carousel-item  active" data-bs-interval="100000000">
-									<img src="${m.rutaImg}">
+									<img src="${m.fotos[0].url}">
 								</div>
 								<div class="carousel-item" data-bs-interval="100000000">
-									<img src="${m.rutaImg}">
+									<img src="${m.fotos[1].url}">
 								</div>
 								<div class="carousel-item" data-bs-interval="100000000">
-									<img src="${m.rutaImg}">
+									<img src="${m.fotos[2].url}">
 								</div>
 							</div>
 						</div>
-
 						<h3>${m.nombre}</h3>
 						<p>${m.descripcion}</p>
+						<p>
+							<span class="negrilla">Sexo:</span> ${m.sexo}
+						</p>
+						<p>
+							<span class="negrilla">Edad:</span> ${m.edad}
+						</p>
+						<p>
+							<span class="negrilla">Dueño:</span> ${m.propietario}
+						</p>
 					</div>
 				</c:forEach>
 			</div>

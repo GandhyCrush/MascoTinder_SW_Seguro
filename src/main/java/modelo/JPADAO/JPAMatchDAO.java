@@ -14,23 +14,42 @@ public class JPAMatchDAO extends JPAGenericDAO<Match, Integer> implements MatchD
 		super(Match.class);
 	}
 	
-	public boolean isMatch(int idMascotaObjetivo, int idMiMascota) {
-		String sentenciaSQL = "SELECT * from matchtable m where m.mascotapretendiente = (?) and "
+	public boolean isMatch(int idMascotaPretendiente, int idMiMascota) {
+		/*String sentenciaSQL = "SELECT * from matchtable m where m.mascotapretendiente = (?) and "
 				+ "m.mascotapretendida_idmascota = (?)";
 		Query consultaNativa = em.createNativeQuery(sentenciaSQL, Mascota.class);
 		consultaNativa.setParameter(1, idMascotaObjetivo);
-		consultaNativa.setParameter(2, idMiMascota);
+		consultaNativa.setParameter(2, idMiMascota);*/
 		
-		return consultaNativa.getResultList() == null;
+		
+		String sentenceJPQL = "SELECT m from matchTable m WHERE m.mascotaPretendida.idMascota= :idMiMascota and "
+				+ "m.mascotaPretendiente.idMascota= :idMascotaPretendiente";
+
+		Query query = this.em.createQuery(sentenceJPQL);
+		query.setParameter("idMiMascota", idMiMascota);
+		query.setParameter("idMascotaPretendiente", idMascotaPretendiente);
+		@SuppressWarnings("unchecked")
+		List<Mascota> resultado = query.getResultList();
+
+		return resultado.size() != 0;
 	}
 
-	public void createMatch(int idMiMascota, int idMascotaObjetivo) {
-		String sentenciaSQL = "INSERT INTO matchtable VALUES (NULL, (?), (?), 0)";
-		Query consultaNativa = em.createNativeQuery(sentenciaSQL, Match.class);
-		consultaNativa.setParameter(1, idMiMascota);
-		consultaNativa.setParameter(2, idMascotaObjetivo);
+	public void createMatch(int idMiMascota, int idMascotaPretendiente) {
+		String miMascotaJPQL = "SELECT m from mascota m WHERE m.idMascota= :idMiMascota";
+		String miPretendienteJPQL = "SELECT m from mascota m WHERE m.idMascota= :idMascotaPretendiente";
+
+		Query miMascotaQuery = this.em.createQuery(miMascotaJPQL);
+		Query miPretendienteQuery = this.em.createQuery(miPretendienteJPQL);
+		miMascotaQuery.setParameter("idMiMascota", idMiMascota);
+		miPretendienteQuery.setParameter("idMascotaPretendiente", idMascotaPretendiente);
+		Mascota miMascota = (Mascota) miMascotaQuery.getSingleResult();
+		Mascota miPretendiente = (Mascota) miPretendienteQuery.getSingleResult();		
 		
-		consultaNativa.executeUpdate();
+		Match newMatch = new Match(miPretendiente, miMascota, false);
+		System.out.println(newMatch);
+		em.getTransaction().begin();
+		em.persist(newMatch);
+		em.getTransaction().commit();
 	}
 
 	public List<Mascota> getMatches(int idMiMascota) {
