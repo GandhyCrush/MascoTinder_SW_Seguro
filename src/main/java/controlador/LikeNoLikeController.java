@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.DAOFactory;
+import modelo.entidades.Especie;
 import modelo.entidades.Mascota;
+import modelo.entidades.Match;
+import modelo.entidades.Persona;
 import modelo.entidades.Preferencias;
+import modelo.entidades.Sexo;
 
 /**
  * Servlet implementation class LikeNoLikeController
@@ -29,30 +33,40 @@ public class LikeNoLikeController extends HttpServlet {
 		procesarSolicitud(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		boolean like = Boolean.parseBoolean(request.getParameter("like"));
-		int idSession = 0;
-		String idLike = request.getParameter("idCard").toString().split("mid")[1];
-		//DAOFactory.getFactory().getMatchDAO().isMatch(idSession, idLike);
-		System.out.println(like+"---------"+idLike);
-		procesarSolicitud(request, response);
+		boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
+		Persona duenio = (Persona) request.getAttribute("duenio");
+		int idMiMascota = 3;
+		int idPretendido = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
+		if (isLike && idPretendido != 0) {
+			matchControl(request, response,idMiMascota,idPretendido);
+		}
+		
+		
+
 	}
 
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Obtener Parametros
-		// Hablar con el modelo
-		Preferencias preferencias = new Preferencias();
-		
+		//Preferencias duenio = (Preferencias) request.getAttribute("preferencias");
+		Preferencias preferencias = new Preferencias(Especie.GATO, Sexo.MACHO,1 , 4);		
 		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
-		// Envio a la vista
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);
+	}
+	private void matchControl(HttpServletRequest request,HttpServletResponse response,int idMiMascota, int idPretendido) throws ServletException, IOException {
+		
+		Match existMatch = DAOFactory.getFactory().getMatchDAO().isMatch(idPretendido, idMiMascota);
+		
+		if (existMatch == null) {
+			DAOFactory.getFactory().getMatchDAO().createMatch(idMiMascota, idPretendido);
+		}else {
+			existMatch.setMatch(true);
+			DAOFactory.getFactory().getMatchDAO().update(existMatch);
+		}
+		procesarSolicitud(request, response);
 	}
 
 }

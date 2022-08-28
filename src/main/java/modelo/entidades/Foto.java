@@ -9,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 @Entity(name = "foto")
 public class Foto implements Serializable{
 	@Id
@@ -17,15 +19,17 @@ public class Foto implements Serializable{
 	private int idFoto;
 	@Column(name = "url")
 	private String url;
-	@ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_img_mascota")
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Mascota mascota;
 	
 	public Foto() {
 		
 	}
 
-	public Foto(String url) {
+	public Foto(String url, Mascota mascota) {
 		this.url = url;
+		this.mascota = mascota;
 	}
 
 	public String getUrl() {

@@ -2,8 +2,10 @@ package modelo.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,16 +14,19 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "matchTable")
 public class Match implements Serializable{
+
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMatch;
 	
-	@ManyToOne @JoinColumn(name = "idmascotapretendiente", referencedColumnName = "idmascota")
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "mascotapretendiente", referencedColumnName = "idmascota")
 	private Mascota mascotaPretendiente;
 	
-	@ManyToOne @JoinColumn(name = "mascotapretendida", referencedColumnName = "idmascota")
+	@ManyToOne 
 	private Mascota mascotaPretendida;
 	
 	@Column(name = "isMatch")
@@ -51,7 +56,11 @@ public class Match implements Serializable{
 	public void setMatch(boolean match) {
 		this.match = match;
 	}
-
+	@Override
+	public String toString() {
+		return "Match [idMatch=" + idMatch + ", mascotaPretendiente=" + mascotaPretendiente + ", mascotaPretendida="
+				+ mascotaPretendida + ", match=" + match + "]";
+	}
 
 	
 	
