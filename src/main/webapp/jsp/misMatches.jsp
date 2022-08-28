@@ -16,7 +16,7 @@
 
 	<%@include file="../templates/banner_superior.html"%>
 
-	<!--a href="MisMatchesController?idMiMascota=5">Matches</a-->
+	<a href="${pageContext.request.contextPath}/MisMatchesController?idMiMascota=1">Matches</a>
 
 	<div style="margin: 60px 150px;">
 		<h1 class="display-6 text-muted">
@@ -133,20 +133,4 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 	crossorigin="anonymous"></script>
-<!--script>
-	function sendRequest(mascota) {
-
-		const http = new XMLHttpRequest();
-		http.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				console.log('exito');
-			}
-		}
-		http.open('GET', "./MisMatchesController", true);
-		http.send();
-
-	}
-	
-	sendRequest()
-</script-->
 </html>

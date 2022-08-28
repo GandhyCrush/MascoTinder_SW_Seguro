@@ -1,7 +1,7 @@
 package controlador;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -27,7 +27,9 @@ public class MisMatchesController extends HttpServlet {
 		int idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
 		System.out.println(idMiMascota);
 		JPAMatchDAO misMatches = new JPAMatchDAO();
-		List<Mascota> matches = misMatches.getMatches(idMiMascota);
+		List<Mascota> matches = new ArrayList<Mascota>();
+		matches = misMatches.getMatches(idMiMascota);
+		System.out.println(matches.toString());
 
 		// Llamar a la vista
 		request.setAttribute("matches", matches);
