@@ -47,10 +47,13 @@ public class Mascota implements Serializable{
 	//claves foraneas
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
 	private List<Foto> fotos;
+	
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
 	private Preferencias preferencias;
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Persona propietario;
+	
 	@OneToMany(mappedBy = "mascotaPretendida")
 	private List<Match> matches;
 	

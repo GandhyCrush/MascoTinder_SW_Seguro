@@ -7,11 +7,9 @@ public class JPAPersonaDAO extends JPAGenericDAO<Persona, Integer> implements Pe
 
 	public JPAPersonaDAO() {
 		super(Persona.class);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Persona autorizarPersona(String username, String password) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
