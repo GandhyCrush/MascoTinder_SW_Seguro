@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.dao.DAOFactory;
 import modelo.entidades.Especie;
 import modelo.entidades.Mascota;
+import modelo.entidades.Match;
+import modelo.entidades.Persona;
 import modelo.entidades.Preferencias;
 import modelo.entidades.Sexo;
 
@@ -35,36 +37,36 @@ public class LikeNoLikeController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
-		int idSession = 0;
-		int idMiMascota = 1;
+		Persona duenio = (Persona) request.getAttribute("duenio");
+		int idMiMascota = 3;
 		int idPretendido = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
-		matchControl(request, response,idMiMascota,idPretendido);
+		if (isLike && idPretendido != 0) {
+			matchControl(request, response,idMiMascota,idPretendido);
+		}
+		
 		
 
 	}
 
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Obtener Parametros
-		// Hablar con el modelo
-		Preferencias preferencias = new Preferencias(Especie.PERRO, Sexo.MACHO,1 , 4);		
+		//Preferencias duenio = (Preferencias) request.getAttribute("preferencias");
+		Preferencias preferencias = new Preferencias(Especie.GATO, Sexo.MACHO,1 , 4);		
 		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
-		// Envio a la vista
-		request.setAttribute("match",false);
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);
 	}
 	private void matchControl(HttpServletRequest request,HttpServletResponse response,int idMiMascota, int idPretendido) throws ServletException, IOException {
 		
-		boolean existMatch = DAOFactory.getFactory().getMatchDAO().isMatch(idPretendido, idMiMascota);
-		if (!existMatch) {
+		Match existMatch = DAOFactory.getFactory().getMatchDAO().isMatch(idPretendido, idMiMascota);
+		
+		if (existMatch == null) {
 			DAOFactory.getFactory().getMatchDAO().createMatch(idMiMascota, idPretendido);
-			request.setAttribute("match",false);
-			request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);
 		}else {
-			request.setAttribute("match",true);
-			request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);
+			existMatch.setMatch(true);
+			DAOFactory.getFactory().getMatchDAO().update(existMatch);
 		}
+		procesarSolicitud(request, response);
 	}
 
 }
