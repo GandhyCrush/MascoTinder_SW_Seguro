@@ -13,14 +13,12 @@ public class ConexionBDD {
 	private ConexionBDD() {
 		try {
 			if (instancia == null) {
-				String servidor = "localhost";
-				String database = "MascoTinder";
-				String url = "jdbc:mysql://" + servidor + "/" + database;
-				String usuario = "root";
-				String password = "mysql2022";
+				String url ="jdbc:mysql://mysqlmascotinder.mysql.database.azure.com:3306/MascoTinder?serverTimezone=UTC"; 
+				
 
 				DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-				instancia = DriverManager.getConnection(url, usuario, password);
+				//instancia = DriverManager.getConnection(url, usuario, password);
+				instancia = DriverManager.getConnection(url, "admin_MTinder@mysqlmascotinder", "MascoTinder2022");
 				System.out.println("Exito en la conexion");
 
 			}

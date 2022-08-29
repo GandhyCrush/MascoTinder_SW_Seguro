@@ -3,57 +3,132 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet'
 	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+<!-- CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+	crossorigin="anonymous">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/cards.css">
+	href="${pageContext.request.contextPath}/css/likeNoLike.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/banner_style.css">
 <title>Like No Like</title>
 </head>
+
 <body>
-	<div class="tinder">
-		<div class="tinder--status">
-			<i class="fa fa-remove"></i> <i class="fa fa-heart"></i>
-		</div>
-
-		<div class="tinder--cards">
-			<c:forEach items="${mascotas}" var="m">
-				<div class="tinder--card">
-					<img src="${m.rutaImg}">
-					<h3>${m.nombre}</h3>
-					<p>${m.descripcion}</p>
-				</div>
-			</c:forEach>
-		</div>
-
-		<div class="tinder--buttons">
-			<button id="nope">
-				<i class="fa fa-remove"></i>
-			</button>
-			<button id="love">
-				<i class="fa fa-heart"></i>
-			</button>
-		</div>
+	<div>
+		<%@include file="../templates/banner_superior.html"%>
 	</div>
 
+	<section>
+
+		<div class="tinder">
+			<div
+				class="tinder--status <c:if test="${match}">tinder_love</c:if>  ">
+
+				<i class="fa fa-heart"></i>
+			</div>
+
+			<div class="tinder--cards">
+				<c:forEach items="${mascotas}" var="m">
+					<div id="mid${m.idMascota}" class="tinder--card">
+						<div id="m${m.idMascota}" class="carousel slide"
+							data-bs-ride="carousel">
+							<div class="carousel-indicators">
+								<button type="button" data-bs-target="#m${m.idMascota}"
+									data-bs-slide-to="0" class="active" aria-current="true"
+									aria-label="Slide 1"></button>
+								<button type="button" data-bs-target="#m${m.idMascota}"
+									data-bs-slide-to="1" aria-label="Slide 2"></button>
+								<button type="button" data-bs-target="#m${m.idMascota}"
+									data-bs-slide-to="2" aria-label="Slide 3"></button>
+							</div>
+							<button class="carousel-control-prev" type="button"
+								data-bs-target="#m${m.idMascota}" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button"
+								data-bs-target="#m${m.idMascota}" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
+							<div class="carousel-inner">
+								<div class="carousel-item  active" data-bs-interval="100000000">
+									<img src="${m.fotos[0].url}">
+								</div>
+								<div class="carousel-item" data-bs-interval="100000000">
+									<img src="${m.fotos[1].url}">
+								</div>
+								<div class="carousel-item" data-bs-interval="100000000">
+									<img src="${m.fotos[2].url}">
+								</div>
+							</div>
+						</div>
+						<h3>${m.nombre}</h3>
+						<p>${m.descripcion}</p>
+						<p>
+							<span class="negrilla">Sexo:</span> ${m.sexo}
+						</p>
+						<p>
+							<span class="negrilla">Edad:</span> ${m.edad}
+						</p>
+						<p>
+							<span class="negrilla">Dueño:</span> ${m.propietario}
+						</p>
+					</div>
+				</c:forEach>
+				<div id="mid0" class="tinder--card">
+
+					<h3>Oops!</h3>
+					<a class="msg" href="${pageContext.request.contextPath}/PreferenciasController"> <span>Se acabaron tus Pretendientes <br>
+							Intenta actualizando tus Preferencias
+					</span>
+					</a>
 
 
-	<script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
+				</div>
+			</div>
+
+			<div class="tinder--buttons">
+				<button id="nope">
+					<i class="fa fa-remove"></i>
+				</button>
+				<button id="love">
+					<i class="fa fa-heart"></i>
+				</button>
+			</div>
+		</div>
+
+
+	</section>
+
+
+
+
+	<!-- JavaScript Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+		crossorigin="anonymous"></script>
 	<script>
-		'use strict';
-
 		var tinderContainer = document.querySelector('.tinder');
 		var allCards = document.querySelectorAll('.tinder--card');
 		var nope = document.getElementById('nope');
 		var love = document.getElementById('love');
-		var keep = false;
+		var url ;
 
 		function initCards(card, index) {
-			var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
-
+			var newCards = document
+					.querySelectorAll('.tinder--card:not(.removed)');
 			newCards.forEach(function(card, index) {
 				card.style.zIndex = allCards.length - index;
 				card.style.transform = 'scale(' + (20 - index) / 20
@@ -65,66 +140,6 @@
 		}
 
 		initCards();
-
-		allCards.forEach(function(el) {
-
-			var hammertime = new Hammer(el);
-
-			hammertime.on('pan', function(event) {
-				el.classList.add('moving');
-			});
-
-			hammertime.on('pan', function(event) {
-				if (event.deltaX === 0)
-					return;
-				if (event.center.x === 0 && event.center.y === 0)
-					return;
-
-				tinderContainer.classList.toggle('tinder_love',
-						event.deltaX > 0);
-				
-				tinderContainer.classList.toggle('tinder_nope',
-						event.deltaX < 0);
-
-				var xMulti = event.deltaX * 0.03;
-				var yMulti = event.deltaY / 80;
-				var rotate = xMulti * yMulti;
-
-				event.target.style.transform = 'translate(' + event.deltaX
-						+ 'px, ' + event.deltaY + 'px) rotate(' + rotate
-						+ 'deg)';
-			});
-
-			hammertime.on('panend', function(event) {
-				el.classList.remove('moving');
-				tinderContainer.classList.remove('tinder_love');
-				tinderContainer.classList.remove('tinder_nope');
-
-				var moveOutWidth = document.body.clientWidth;
-				keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
-				isMatch(event.deltaX >= 80);
-
-				event.target.classList.toggle('removed', !keep);
-				if (keep) {
-					event.target.style.transform = '';
-				} else {
-					var endX = Math.max(Math.abs(event.velocityX)
-							* moveOutWidth, moveOutWidth);
-					var toX = event.deltaX > 0 ? endX : -endX;
-					var endY = Math.abs(event.velocityY) * moveOutWidth;
-					var toY = event.deltaY > 0 ? endY : -endY;
-					var xMulti = event.deltaX * 0.03;
-					var yMulti = event.deltaY / 80;
-					var rotate = xMulti * yMulti;
-
-					event.target.style.transform = 'translate(' + toX + 'px, '
-							+ (toY + event.deltaY) + 'px) rotate(' + rotate
-							+ 'deg)';
-					initCards();
-				}
-			});
-		});
-
 		function createButtonListener(love) {
 			return function(event) {
 				var cards = document
@@ -135,7 +150,7 @@
 					return false;
 
 				var card = cards[0];
-
+				getIdCard(card.id);
 				card.classList.add('removed');
 
 				if (love) {
@@ -145,26 +160,28 @@
 					card.style.transform = 'translate(-' + moveOutWidth
 							+ 'px, -100px) rotate(30deg)';
 				}
-				isMatch(love);
+				sendLike(love);
 				initCards();
 
 				event.preventDefault();
 			};
 		}
-		function isMatch(match) {
-
+		function sendLike(like) {
+			console.log(like);
 			const http = new XMLHttpRequest();
-			const url = './LikeNoLikeController?match='+ match;
-			http.onreadystatechange = function () {
+			url += '&like=' + like;
+			http.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					//console.log(url);
-					
+					//console.log('exito');
 				}
 			}
-			http.open('GET', url , true);
+			http.open('POST', url, true);
 			http.send();
-			
-			
+
+		}
+		function getIdCard(cardId) {
+			url = './LikeNoLikeController?idCard=';
+			url += cardId;
 		}
 
 		var nopeListener = createButtonListener(false);
@@ -174,4 +191,5 @@
 		love.addEventListener('click', loveListener);
 	</script>
 </body>
+
 </html>
