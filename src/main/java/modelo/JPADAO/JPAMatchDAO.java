@@ -38,6 +38,7 @@ public class JPAMatchDAO extends JPAGenericDAO<Match, Integer> implements MatchD
 
 		Query miMascotaQuery = this.em.createQuery(miMascotaJPQL);
 		Query miPretendienteQuery = this.em.createQuery(miPretendienteJPQL);
+		
 		miMascotaQuery.setParameter("idMiMascota", idMiMascota);
 		miPretendienteQuery.setParameter("idMascotaPretendiente", idMascotaPretendiente);
 		Mascota miMascota = (Mascota) miMascotaQuery.getSingleResult();

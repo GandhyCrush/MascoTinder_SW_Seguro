@@ -20,9 +20,7 @@ public class MisMascotasController extends HttpServlet {
 
     public MisMascotasController() {
         super();
-
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		procesarSolicitud(request, response);

@@ -42,8 +42,9 @@ public class Preferencias implements Serializable{
 		
 	}
 
-	public Preferencias(Especie especie, Sexo sexo, int edadMinima, int edadMaxima) {
+	public Preferencias(Mascota mascota, Especie especie, Sexo sexo, int edadMinima, int edadMaxima) {
 		super();
+		this.mascota = mascota;
 		this.especie = especie;
 		this.sexo = sexo;
 		this.edadMinima = edadMinima;
@@ -84,6 +85,10 @@ public class Preferencias implements Serializable{
 
 	public void setEdadMaxima(int edadMaxima) {
 		this.edadMaxima = edadMaxima;
+	}
+	
+	public Mascota getMascota() {
+		return mascota;
 	}
 
 	@Override

@@ -39,23 +39,21 @@ public class LikeNoLikeController extends HttpServlet {
 		boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
 		Persona duenio = (Persona) request.getAttribute("duenio");
 		int idMiMascota = 3;
-		int idPretendido = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
-		if (isLike && idPretendido != 0) {
-			matchControl(request, response,idMiMascota,idPretendido);
+		int idPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
+		if (isLike && idPretendiente != 0) {
+			matchControl(request, response,idMiMascota,idPretendiente);
 		}
-		
-		
-
 	}
 
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//Preferencias duenio = (Preferencias) request.getAttribute("preferencias");
-		Preferencias preferencias = new Preferencias(Especie.GATO, Sexo.MACHO,1 , 4);		
+		//Preferencias preferencias = new Preferencias(Especie.GATO, Sexo.MACHO,1 , 4);		
 		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);
 	}
+	
 	private void matchControl(HttpServletRequest request,HttpServletResponse response,int idMiMascota, int idPretendido) throws ServletException, IOException {
 		
 		Match existMatch = DAOFactory.getFactory().getMatchDAO().isMatch(idPretendido, idMiMascota);
