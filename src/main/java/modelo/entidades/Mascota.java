@@ -18,8 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-@Entity(name = "mascota")
 
+@Entity(name = "mascota")
 public class Mascota implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
