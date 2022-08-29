@@ -48,7 +48,9 @@ public class LikeNoLikeController extends HttpServlet {
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//Preferencias duenio = (Preferencias) request.getAttribute("preferencias");
-		//Preferencias preferencias = new Preferencias(Especie.GATO, Sexo.MACHO,1 , 4);		
+		//int idMiMascota = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
+		Mascota miMascota = DAOFactory.getFactory().getMascotaDAO().getById(3);
+		Preferencias preferencias = new Preferencias(miMascota,Especie.GATO, Sexo.MACHO,1 , 4);		
 		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);

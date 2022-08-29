@@ -25,14 +25,14 @@ public class MisMatchesController extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Llamar al modelo
-		int idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
+		int idMiMascota = 1;
 		System.out.println(idMiMascota);
 		List<Mascota> matches = new ArrayList<Mascota>();
 		matches = DAOFactory.getFactory().getMatchDAO().getMatches(idMiMascota);
-		System.out.println(matches.toString());
+		System.out.println(matches.get(0));
 		
 		Mascota mascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
-		System.out.println(mascota.toString());
+		//System.out.println(mascota.toString());
 		
 		// Llamar a la vista
 		request.setAttribute("matches", matches);
