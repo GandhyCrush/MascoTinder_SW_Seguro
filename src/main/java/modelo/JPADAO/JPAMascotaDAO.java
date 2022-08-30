@@ -1,16 +1,9 @@
 package modelo.JPADAO;
 
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
 import javax.persistence.Query;
-
-import modelo.dao.DAOFactory;
 import modelo.dao.MascotaDAO;
 import modelo.entidades.Mascota;
-import modelo.entidades.Match;
 import modelo.entidades.Preferencias;
 
 public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements MascotaDAO {

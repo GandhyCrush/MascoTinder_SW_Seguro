@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import modelo.dao.DAOFactory;
 import modelo.entidades.Mascota;
-import modelo.entidades.Preferencias;
 
 @WebServlet("/MisMascotasController")
 public class MisMascotasController extends HttpServlet {

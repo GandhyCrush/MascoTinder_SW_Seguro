@@ -8,12 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import modelo.dao.DAOFactory;
 import modelo.entidades.Especie;
 import modelo.entidades.Mascota;
 import modelo.entidades.Match;
-import modelo.entidades.Persona;
 import modelo.entidades.Preferencias;
 import modelo.entidades.Sexo;
 
@@ -37,7 +35,7 @@ public class LikeNoLikeController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
-		Persona duenio = (Persona) request.getAttribute("duenio");
+		//Persona duenio = (Persona) request.getAttribute("duenio");
 		int idMiMascota = 3;
 		int idPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
 		if (isLike && idPretendiente != 0) {
