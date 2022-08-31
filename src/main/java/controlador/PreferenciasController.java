@@ -55,12 +55,12 @@ public class PreferenciasController extends HttpServlet {
 			preferenciasMiMascota.setEdadMaxima(edadMaxima);
 			
 			DAOFactory.getFactory().getPreferenciasDAO().update(preferenciasMiMascota);
-		}
-		else {
+		}else {
 			Mascota miMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
 			Preferencias nuevasPreferenciasMiMascota = new Preferencias(miMascota, Especie.valueOf(especie), Sexo.valueOf(sexo), edadMinima, edadMaxima);
 			DAOFactory.getFactory().getPreferenciasDAO().create(nuevasPreferenciasMiMascota);
 		}
+		request.getRequestDispatcher("/MisMascotasController").forward(request, response);
 	}
 
 }

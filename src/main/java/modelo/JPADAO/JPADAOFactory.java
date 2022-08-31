@@ -24,6 +24,6 @@ public class JPADAOFactory extends DAOFactory{
 	}
 
 	public PreferenciasDAO getPreferenciasDAO() {
-		return new JPAPreferenciasDAO();
+		return new JPAPreferenciaDAO();
 	}
 }
