@@ -30,7 +30,8 @@ public class MisMascotasController extends HttpServlet {
 	}
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMisMascotas(1);
+		// debe recibir id de session 
+		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMisMascotas(2);
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/misMascotas.jsp").forward(request, response);
 	}

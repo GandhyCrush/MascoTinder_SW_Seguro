@@ -79,7 +79,7 @@
 						<span class="negrilla">Dueño:</span> ${m.propietario}
 					</p>
 					<span><a class="custom-btn btn-16"
-						href="${pageContext.request.contextPath}/MisMatchesController">Mis
+						href="${pageContext.request.contextPath}/MisMatchesController?idMiMascota=${m.idMascota}">Mis
 							Matches</a></span> <span><a class="custom-btn btn-16"
 						href="${pageContext.request.contextPath}/PreferenciasController?idMiMascota=${m.idMascota}">Preferencias</a></span>
 					<span><a class="custom-btn btn-16"
