@@ -22,7 +22,7 @@ public class Match implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMatch;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "mascotapretendiente", referencedColumnName = "idmascota")
 	private Mascota mascotaPretendiente;
 	

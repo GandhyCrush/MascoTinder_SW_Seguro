@@ -19,7 +19,7 @@ public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements Ma
 		super(Mascota.class);
 	}
 
-	private EntityManager em = Persistence.createEntityManagerFactory("MascoTinder_Proyecto").createEntityManager();
+	
 
 	public List<Mascota> getMascotas(Preferencias preferencias) {
 
@@ -28,8 +28,8 @@ public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements Ma
 				+ "m.edad >= :par_edadMin and " 
 				+ "m.edad <= :par_edadMax and " 
 				+ "m.sexo = :par_sexo and "
-				+ "m.idMascota not in (SELECT match.mascotapretendiente.idMascota from match "
-				+ "where match.mascotapretendida.idMascota = :par_idMiMascota)";
+				+ "m.idMascota not in (SELECT ma.mascotaPretendiente.idMascota from matchTable ma "
+				+ "where ma.mascotaPretendida.idMascota = :par_idMiMascota)";
 
 		Query query = this.em.createQuery(sentenceJPQL);
 		query.setParameter("par_especie", preferencias.getEspecie());
