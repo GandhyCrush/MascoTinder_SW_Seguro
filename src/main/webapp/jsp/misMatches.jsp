@@ -65,15 +65,9 @@
 						</div>
 						<h3>${m.nombre}</h3>
 						<p>${m.descripcion}</p>
-						<p>
-							<span class="negrilla">Sexo:</span> ${m.sexo}
-						</p>
-						<p>
-							<span class="negrilla">Edad:</span> ${m.edad}
-						</p>
-						<p>
-							<span class="negrilla">Dueño:</span> ${m.propietario}
-						</p>
+						<a href="${pageContext.request.contextPath}/MensajesController"
+							class="nav-link active text-primary text-end fw-bold me-3 mt-3">Mensajes</a>
+
 					</div>
 				</c:forEach>
 
