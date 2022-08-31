@@ -25,7 +25,7 @@ public class MisMascotasController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
+		//int idPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
 		procesarSolicitud(request, response);
 	}
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)

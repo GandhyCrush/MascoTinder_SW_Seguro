@@ -35,7 +35,7 @@ public class Preferencias implements Serializable{
 	@Column(name = "edadMaxima")
 	private int edadMaxima;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
 	private Mascota mascota;
 	
 	public Preferencias() {

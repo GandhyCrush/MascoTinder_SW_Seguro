@@ -46,7 +46,7 @@ public class Mascota implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
 	private List<Foto> fotos;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "mascota")
 	private Preferencias preferencias;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
