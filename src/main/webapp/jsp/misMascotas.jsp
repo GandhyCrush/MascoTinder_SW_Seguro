@@ -81,7 +81,7 @@
 					<span><a class="custom-btn btn-16"
 						href="${pageContext.request.contextPath}/MisMatchesController">Mis
 							Matches</a></span> <span><a class="custom-btn btn-16"
-						href="${pageContext.request.contextPath}/PreferenciasController">Preferencias</a></span>
+						href="${pageContext.request.contextPath}/PreferenciasController?idMiMascota=${m.idMascota}">Preferencias</a></span>
 					<span><a class="custom-btn btn-16"
 						href="${pageContext.request.contextPath}/LikeNoLikeController?idMiMascota=${m.idMascota}">Buscar</a></span>
 				</div>

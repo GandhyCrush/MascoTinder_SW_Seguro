@@ -33,10 +33,10 @@
 
 						<select class="form-select text-white fw-bold"
 							style="background-color: rgb(129, 195, 253);"
-							aria-label="Default select example">
-							<option value="1">PERRO</option>
-							<option value="2">GATO</option>
-							<option value="3">CONEJO</option>
+							aria-label="Default select example" name="especie">
+							<option value="PERRO">PERRO</option>
+							<option value="GATO">GATO</option>
+							<option value="CONEJO">CONEJO</option>
 						</select>
 
 
@@ -46,9 +46,9 @@
 
 						<select class="form-select text-white fw-bold"
 							style="background-color: rgb(129, 195, 253);"
-							aria-label="Default select example">
-							<option value="1">HEMBRAS</option>
-							<option value="2">MACHOS</option>
+							aria-label="Default select example" name="sexo">
+							<option value="HEMBRA">HEMBRA</option>
+							<option value="MACHO">MACHO</option>
 						</select>
 					</div>
 					<div style="padding: 30px 60px 0px;">
@@ -59,7 +59,7 @@
 								<h5>Mayores a</h5>
 								<select class="form-select text-white fw-bold"
 									style="background-color: rgb(129, 195, 253);"
-									aria-label="Default select example">
+									aria-label="Default select example" name="edadMinima">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -87,7 +87,7 @@
 								<h5>Menores a</h5>
 								<select class="form-select text-white fw-bold"
 									style="background-color: rgb(129, 195, 253);"
-									aria-label="Default select example">
+									aria-label="Default select example" name="edadMaxima">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>

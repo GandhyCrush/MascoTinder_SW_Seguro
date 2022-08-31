@@ -18,7 +18,7 @@ public class JPAPreferenciasDAO extends JPAGenericDAO<Preferencias, Integer> imp
 
 		Query query = this.em.createQuery(sentenceJPQL);
 		query.setParameter("idMiMascota", idMiMascota);
-		Preferencias resultado = (Preferencias) query.getResultList();
+		Preferencias resultado = (Preferencias) query.getSingleResult();
 
 		return resultado;
 	}
