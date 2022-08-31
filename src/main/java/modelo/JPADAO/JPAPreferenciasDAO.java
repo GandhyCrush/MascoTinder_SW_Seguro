@@ -1,11 +1,9 @@
 package modelo.JPADAO;
 
-import java.util.List;
 
 import javax.persistence.Query;
 
 import modelo.dao.PreferenciasDAO;
-import modelo.entidades.Mascota;
 import modelo.entidades.Preferencias;
 
 public class JPAPreferenciasDAO extends JPAGenericDAO<Preferencias, Integer> implements PreferenciasDAO{
@@ -20,8 +18,7 @@ public class JPAPreferenciasDAO extends JPAGenericDAO<Preferencias, Integer> imp
 
 		Query query = this.em.createQuery(sentenceJPQL);
 		query.setParameter("idMiMascota", idMiMascota);
-		@SuppressWarnings("unchecked")
-		Preferencias resultado = (Preferencias) query.getResultList();
+		Preferencias resultado = (Preferencias) query.getSingleResult();
 
 		return resultado;
 	}

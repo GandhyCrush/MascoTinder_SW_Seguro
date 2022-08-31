@@ -13,15 +13,13 @@
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-	crossorigin="anonymous">
+	rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/misMascotasStyles.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/banner_style.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	rel="stylesheet">
 <title>Mis Mascotas</title>
 </head>
 
@@ -36,7 +34,8 @@
 
 			<c:forEach items="${mascotas}" var="m">
 				<div id="mid${m.idMascota}" class="tinder--card">
-					<div id="m${m.idMascota}" class="carousel slide" data-bs-ride="carousel">
+					<div id="m${m.idMascota}" class="carousel slide"
+						data-bs-ride="carousel">
 						<div class="carousel-indicators">
 							<button type="button" data-bs-target="#m${m.idMascota}"
 								data-bs-slide-to="0" class="active" aria-current="true"
@@ -70,17 +69,28 @@
 					</div>
 					<h3>${m.nombre}</h3>
 					<p>${m.descripcion}</p>
-					<p> <span class="negrilla">Sexo:</span>  ${m.sexo}</p>
-					<p><span class="negrilla">Edad:</span> ${m.edad}</p>
-					<p><span class="negrilla">Dueño:</span> ${m.propietario}</p>
-					<span ><a class="custom-btn btn-16" href="${pageContext.request.contextPath}/MisMatchesController">Mis Matches</a></span>
-					<span ><a class="custom-btn btn-16" href="${pageContext.request.contextPath}/PreferenciasController">Preferencias</a></span>
+					<p>
+						<span class="negrilla">Sexo:</span> ${m.sexo}
+					</p>
+					<p>
+						<span class="negrilla">Edad:</span> ${m.edad}
+					</p>
+					<p>
+						<span class="negrilla">Dueño:</span> ${m.propietario}
+					</p>
+					<span><a class="custom-btn btn-16"
+						href="${pageContext.request.contextPath}/MisMatchesController">Mis
+							Matches</a></span> <span><a class="custom-btn btn-16"
+						href="${pageContext.request.contextPath}/PreferenciasController?idMiMascota=${m.idMascota}">Preferencias</a></span>
+					<span><a class="custom-btn btn-16"
+						href="${pageContext.request.contextPath}/LikeNoLikeController?idMiMascota=${m.idMascota}">Buscar</a></span>
 				</div>
 			</c:forEach>
 		</div>
-	<a class="float-btn" href="${pageContext.request.contextPath}/RegistrarMascotaController">
-	<span class="material-icons ">add</span>
-	</a>
+		<a class="float-btn"
+			href="${pageContext.request.contextPath}/RegistrarMascotaController">
+			<span class="material-icons ">add</span>
+		</a>
 
 	</section>
 
@@ -89,11 +99,10 @@
 
 	<!-- JavaScript Bundle with Popper -->
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-		crossorigin="anonymous">
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js">
 		
 	</script>
+	<script src="${pageContext.request.contextPath}/js/sendByAjax.js"></script>
 
 </body>
 

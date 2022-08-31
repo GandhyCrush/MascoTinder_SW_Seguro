@@ -50,11 +50,11 @@ public class JPAMatchDAO extends JPAGenericDAO<Match, Integer> implements MatchD
 
 	public List<Mascota> getMatches(int idMiMascota) {
 		String sentenciaJPQL = "SELECT m from mascota m where m.idMascota in (SELECT "
-				+ "ma.mascotaPretendida.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendiente.idMascota =:idMiMascota) or m.idMascota in"
-				+ " (SELECT ma.mascotaPretendiente.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendida.idMascota =:idMiMascota )";
+				+ "ma.mascotaPretendida.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendiente.idMascota =:par_idMiMascota) or m.idMascota in"
+				+ " (SELECT ma.mascotaPretendiente.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendida.idMascota =:par_idMiMascota )";
 		
 		Query query = this.em.createQuery(sentenciaJPQL);
-		query.setParameter("idMiMascota", idMiMascota);
+		query.setParameter("par_idMiMascota", idMiMascota);
 		@SuppressWarnings("unchecked")
 		List<Mascota> resultado = query.getResultList();
 		return resultado;

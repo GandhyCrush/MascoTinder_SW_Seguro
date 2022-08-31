@@ -1,16 +1,9 @@
 package modelo.JPADAO;
 
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
 import javax.persistence.Query;
-
-import modelo.dao.DAOFactory;
 import modelo.dao.MascotaDAO;
 import modelo.entidades.Mascota;
-import modelo.entidades.Match;
 import modelo.entidades.Preferencias;
 
 public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements MascotaDAO {
@@ -28,8 +21,12 @@ public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements Ma
 				+ "m.edad >= :par_edadMin and " 
 				+ "m.edad <= :par_edadMax and " 
 				+ "m.sexo = :par_sexo and "
+				+ "m.propietario != :par_idPropietario and "
 				+ "m.idMascota not in (SELECT ma.mascotaPretendiente.idMascota from matchTable ma "
-				+ "where ma.mascotaPretendida.idMascota = :par_idMiMascota)";
+				+ "where ma.mascotaPretendida.idMascota = :par_idMiMascota) and "
+				+ "m.idMascota not in (SELECT "
+				+ "ma.mascotaPretendida.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendiente.idMascota =:par_idMiMascota) or m.idMascota in"
+				+ " (SELECT ma.mascotaPretendiente.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendida.idMascota =:par_idMiMascota )";
 
 		Query query = this.em.createQuery(sentenceJPQL);
 		query.setParameter("par_especie", preferencias.getEspecie());
@@ -37,6 +34,7 @@ public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements Ma
 		query.setParameter("par_edadMax", preferencias.getEdadMaxima());
 		query.setParameter("par_sexo", preferencias.getSexo());
 		query.setParameter("par_idMiMascota", preferencias.getMascota().getIdMascota());
+		query.setParameter("par_idPropietario", preferencias.getMascota().getPropietario());
 		@SuppressWarnings("unchecked")
 		List<Mascota> resultado = query.getResultList();
 		

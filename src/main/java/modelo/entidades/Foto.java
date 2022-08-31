@@ -14,6 +14,10 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "foto")
 public class Foto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idFoto;
