@@ -13,9 +13,7 @@
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-	crossorigin="anonymous">
+	rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/likeNoLike.css">
 <link rel="stylesheet"
@@ -89,8 +87,10 @@
 				<div id="mid0" class="tinder--card">
 
 					<h3>Oops!</h3>
-					<a class="msg" href="${pageContext.request.contextPath}/PreferenciasController"> <span>Se acabaron tus Pretendientes <br>
-							Intenta actualizando tus Preferencias
+					<a class="msg"
+						href="${pageContext.request.contextPath}/PreferenciasController">
+						<span>Se acabaron tus Pretendientes <br> Intenta
+							actualizando tus Preferencias
 					</span>
 					</a>
 
@@ -116,80 +116,10 @@
 
 	<!-- JavaScript Bundle with Popper -->
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-		crossorigin="anonymous"></script>
-	<script>
-		var tinderContainer = document.querySelector('.tinder');
-		var allCards = document.querySelectorAll('.tinder--card');
-		var nope = document.getElementById('nope');
-		var love = document.getElementById('love');
-		var url ;
-
-		function initCards(card, index) {
-			var newCards = document
-					.querySelectorAll('.tinder--card:not(.removed)');
-			newCards.forEach(function(card, index) {
-				card.style.zIndex = allCards.length - index;
-				card.style.transform = 'scale(' + (20 - index) / 20
-						+ ') translateY(-' + 30 * index + 'px)';
-				card.style.opacity = (10 - index) / 10;
-			});
-
-			tinderContainer.classList.add('loaded');
-		}
-
-		initCards();
-		function createButtonListener(love) {
-			return function(event) {
-				var cards = document
-						.querySelectorAll('.tinder--card:not(.removed)');
-				var moveOutWidth = document.body.clientWidth * 1.5;
-
-				if (!cards.length)
-					return false;
-
-				var card = cards[0];
-				getIdCard(card.id);
-				card.classList.add('removed');
-
-				if (love) {
-					card.style.transform = 'translate(' + moveOutWidth
-							+ 'px, -100px) rotate(-30deg)';
-				} else {
-					card.style.transform = 'translate(-' + moveOutWidth
-							+ 'px, -100px) rotate(30deg)';
-				}
-				sendLike(love);
-				initCards();
-
-				event.preventDefault();
-			};
-		}
-		function sendLike(like) {
-			console.log(like);
-			const http = new XMLHttpRequest();
-			url += '&like=' + like;
-			http.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					//console.log('exito');
-				}
-			}
-			http.open('POST', url, true);
-			http.send();
-
-		}
-		function getIdCard(cardId) {
-			url = './LikeNoLikeController?idCard=';
-			url += cardId;
-		}
-
-		var nopeListener = createButtonListener(false);
-		var loveListener = createButtonListener(true);
-
-		nope.addEventListener('click', nopeListener);
-		love.addEventListener('click', loveListener);
-	</script>
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/sendByAjax.js"></script>
+	<script src="${pageContext.request.contextPath}/js/createListeners.js"></script>
+	<script src="${pageContext.request.contextPath}/js/cards.js"></script>
 </body>
 
 </html>
