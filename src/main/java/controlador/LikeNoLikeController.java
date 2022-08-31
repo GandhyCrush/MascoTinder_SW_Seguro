@@ -19,19 +19,20 @@ import modelo.entidades.Preferencias;
 @WebServlet("/LikeNoLikeController")
 public class LikeNoLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	int idMiMascota;
 	public LikeNoLikeController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
+		idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
 		Mascota miMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
-		Preferencias preferencias = (Preferencias) request.getAttribute("preferencias");
-		//new Preferencias(miMascota,Especie.GATO, Sexo.MACHO,1 , 4);		
+		System.out.println(miMascota);
+		Preferencias preferencias = miMascota.getPreferencias();
 		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
 		request.setAttribute("mascotas", mascotas);
+		request.setAttribute("idMiMascota", idMiMascota);
 		enviarAVista(request, response);
 	}
 
@@ -39,10 +40,7 @@ public class LikeNoLikeController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
-		//Persona duenio = (Persona) request.getAttribute("duenio");
-		int idMiMascota = 3;
 		int idPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
-		System.out.println(idPretendiente + "hola mundo");
 		if (isLike && idPretendiente != 0) {
 			matchControl(request, response,idMiMascota,idPretendiente);
 		}
