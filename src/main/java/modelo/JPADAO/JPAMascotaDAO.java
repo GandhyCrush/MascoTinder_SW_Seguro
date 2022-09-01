@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.Query;
 import modelo.dao.MascotaDAO;
 import modelo.entidades.Mascota;
+import modelo.entidades.Persona;
 import modelo.entidades.Preferencias;
 
 public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements MascotaDAO {
@@ -25,8 +26,7 @@ public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements Ma
 				+ "m.idMascota not in (SELECT ma.mascotaPretendiente.idMascota from matchTable ma "
 				+ "where ma.mascotaPretendida.idMascota = :par_idMiMascota) and "
 				+ "m.idMascota not in (SELECT "
-				+ "ma.mascotaPretendida.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendiente.idMascota =:par_idMiMascota) or m.idMascota in"
-				+ " (SELECT ma.mascotaPretendiente.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendida.idMascota =:par_idMiMascota )";
+				+ "ma.mascotaPretendida.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendiente.idMascota =:par_idMiMascota)";
 
 		Query query = this.em.createQuery(sentenceJPQL);
 		query.setParameter("par_especie", preferencias.getEspecie());
@@ -41,12 +41,12 @@ public class JPAMascotaDAO extends JPAGenericDAO<Mascota, Integer> implements Ma
 		return resultado;
 	}
 
-	public List<Mascota> getMisMascotas(int idPropietario) {
+	public List<Mascota> getMisMascotas(Persona propietario) {
 
-		String sentenceJPQL = "SELECT m from mascota m WHERE m.propietario.idPersona= :idPropietario";
+		String sentenceJPQL = "SELECT m from mascota m WHERE m.propietario =:par_propietario";
 
 		Query query = this.em.createQuery(sentenceJPQL);
-		query.setParameter("idPropietario", idPropietario);
+		query.setParameter("par_propietario", propietario);
 		@SuppressWarnings("unchecked")
 		List<Mascota> resultado = query.getResultList();
 

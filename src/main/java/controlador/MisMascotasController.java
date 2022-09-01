@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import modelo.dao.DAOFactory;
 import modelo.entidades.Mascota;
+import modelo.entidades.Persona;
 
 @WebServlet("/MisMascotasController")
 public class MisMascotasController extends HttpServlet {
@@ -25,13 +28,13 @@ public class MisMascotasController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//int idPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
 		procesarSolicitud(request, response);
 	}
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// debe recibir id de session 
-		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMisMascotas(2);
+		HttpSession session = request.getSession();
+		Persona personaAutorizada = (Persona) session.getAttribute("usuarioLogeado");
+		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMisMascotas(personaAutorizada);
 		request.setAttribute("mascotas", mascotas);
 		request.getRequestDispatcher("/jsp/misMascotas.jsp").forward(request, response);
 	}

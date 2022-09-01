@@ -28,7 +28,6 @@ public class LikeNoLikeController extends HttpServlet {
 			throws ServletException, IOException {
 		idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
 		Mascota miMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
-		System.out.println(miMascota);
 		Preferencias preferencias = miMascota.getPreferencias();
 		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
 		request.setAttribute("mascotas", mascotas);
