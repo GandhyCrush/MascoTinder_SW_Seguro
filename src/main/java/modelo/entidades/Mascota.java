@@ -127,7 +127,7 @@ public class Mascota implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Mascota: " + this.nombre + "(" + this.especie + ")"+ this.fotos;
+		return "Mascota: " + this.nombre + "(" + this.especie + ")"+ this.fotos + this.preferencias;
 	}
 	
 	

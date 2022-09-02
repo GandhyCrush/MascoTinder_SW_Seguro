@@ -14,7 +14,7 @@
 <body>
 	<div class="container">
 		<form method="post" action="LoginController">
-			<h1>LOG IN MascoTinder</h1>
+			<h1>LOGIN MascoTinder</h1>
 			<div class="img"><img src="https://img.icons8.com/cotton/64/000000/dog-heart--v3.png" /></div> 
 			<div class="form-group">
 				<input type="text" required="required" name="username" pattern="[A-Za-z0-9]+" minlength="5" maxlength="12" 
@@ -30,7 +30,9 @@
 				<button type="submit" class="button">
 					<span>INGRESAR</span>
 				</button>
+				<div id="registro"><a href="RegistrarPersonaController" >¿Aun no tienes cuenta? Registrate</a></div>
 			</div>
+			
 		</form>
 
 	</div>

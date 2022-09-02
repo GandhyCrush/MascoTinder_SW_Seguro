@@ -13,9 +13,6 @@ import modelo.entidades.Mascota;
 import modelo.entidades.Match;
 import modelo.entidades.Preferencias;
 
-/**
- * Servlet implementation class LikeNoLikeController
- */
 @WebServlet("/LikeNoLikeController")
 public class LikeNoLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,10 +26,15 @@ public class LikeNoLikeController extends HttpServlet {
 		idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
 		Mascota miMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
 		Preferencias preferencias = miMascota.getPreferencias();
-		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
-		request.setAttribute("mascotas", mascotas);
-		request.setAttribute("idMiMascota", idMiMascota);
-		enviarAVista(request, response);
+		if (existePreferencias(preferencias)) {
+			List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferencias);
+			request.setAttribute("mascotas", mascotas);
+			request.setAttribute("idMiMascota", idMiMascota);
+			enviarAVista(request, response);
+		}else {
+			request.getRequestDispatcher("/PreferenciasController").forward(request, response);
+		}
+		
 	}
 
 
@@ -61,6 +63,9 @@ public class LikeNoLikeController extends HttpServlet {
 			DAOFactory.getFactory().getMatchDAO().update(existMatch);
 		}
 		enviarAVista(request, response);
+	}
+	private boolean existePreferencias(Preferencias preferencias) {
+		return preferencias != null;
 	}
 
 }
