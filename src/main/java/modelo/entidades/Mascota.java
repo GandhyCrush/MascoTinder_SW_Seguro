@@ -49,7 +49,7 @@ public class Mascota implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "mascota")
 	private Preferencias preferencias;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Persona propietario;
 	
 	@OneToMany(mappedBy = "mascotaPretendida")

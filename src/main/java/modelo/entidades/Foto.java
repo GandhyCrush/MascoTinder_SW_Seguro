@@ -24,7 +24,7 @@ public class Foto implements Serializable{
 	@Column(name = "url")
 	private String url;
 	@JoinColumn(name = "fk_img_mascota")
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
 	private Mascota mascota;
 	
 	public Foto() {
