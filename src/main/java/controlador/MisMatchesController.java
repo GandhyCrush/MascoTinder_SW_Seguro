@@ -23,15 +23,10 @@ public class MisMatchesController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// Llamar al modelo
 		int idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
 		List<Mascota> matches = new ArrayList<Mascota>();
 		matches = DAOFactory.getFactory().getMatchDAO().getMatches(idMiMascota);
-		
 		Mascota mascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
-		
-		// Llamar a la vista
 		request.setAttribute("matches", matches);
 		request.setAttribute("mascota", mascota);
 		request.getRequestDispatcher("/jsp/misMatches.jsp").forward(request, response);

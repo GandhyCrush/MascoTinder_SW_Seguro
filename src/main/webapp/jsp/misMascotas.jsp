@@ -73,7 +73,7 @@
 						<span class="negrilla">Sexo:</span> ${m.sexo}
 					</p>
 					<p>
-						<span class="negrilla">Edad:</span> ${m.edad}
+						<span class="negrilla">Edad:</span> ${m.edad} años
 					</p>
 					<p>
 						<span class="negrilla">Dueño:</span> ${m.propietario}

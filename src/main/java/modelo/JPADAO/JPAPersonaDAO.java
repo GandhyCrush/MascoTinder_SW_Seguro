@@ -1,5 +1,7 @@
 package modelo.JPADAO;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import modelo.dao.PersonaDAO;
@@ -11,12 +13,19 @@ public class JPAPersonaDAO extends JPAGenericDAO<Persona, Integer> implements Pe
 		super(Persona.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Persona autorizarPersona(String username, String password) {
-		String sentenciaJPQL = "SELECT p FROM PERSONA p WHERE p.username= :username and p.clave= :clave";
+		Persona personaAutorizada = null;
+		String sentenciaJPQL = "SELECT p FROM persona p WHERE p.username= :username and p.clave= :clave";
 		Query consulta =  em.createQuery(sentenciaJPQL);
 		consulta.setParameter("username",username);
 		consulta.setParameter("clave", password);
-		return (Persona) consulta.getSingleResult();
+		List<Persona> resultado = consulta.getResultList();
+		if(resultado.size()>0) {
+			personaAutorizada = resultado.get(0);
+		}
+		
+		return personaAutorizada;
 	}
 
 }

@@ -31,7 +31,7 @@ public class Match implements Serializable{
 	
 	@Column(name = "isMatch")
 	private boolean match;
-	//private Fecha fecha;
+
 	
 	public Match() {
 		
