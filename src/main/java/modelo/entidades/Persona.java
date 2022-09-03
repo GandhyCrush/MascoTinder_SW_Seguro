@@ -35,6 +35,9 @@ public class Persona implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "propietario")
 	private List<Mascota> mascotas;
 	
+	@OneToMany(mappedBy = "receptor")
+	private List<Mensaje> mensajes;
+	
 	public Persona() {
 		
 	}

@@ -9,6 +9,7 @@
 		<class>modelo.entidades.Foto</class>
 		<class>modelo.entidades.Preferencias</class>
 		<class>modelo.entidades.Match</class>
+		<class>modelo.entidades.Mensaje</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://mysqlmascotinder.mysql.database.azure.com:3306/MascoTinder?serverTimezone=UTC" />
