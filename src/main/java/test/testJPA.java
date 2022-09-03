@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import modelo.entidades.Especie;
-import modelo.entidades.Foto;
-import modelo.entidades.Mascota;
-import modelo.entidades.Persona;
-import modelo.entidades.Sexo;
+import modelo.entidades.*;
 
 public class testJPA {
 
@@ -24,7 +20,9 @@ public class testJPA {
 		fotosAtom.add(new Foto("./imgs/Atom2.jpg",m));
 		fotosAtom.add(new Foto("./imgs/Atom3.jpg",m));
 		m.setFotos(fotosAtom);
-		
+		em.getTransaction().begin();
+		em.persist(p);
+		em.getTransaction().commit();
 		em.getTransaction().begin();
 		em.persist(m);
 		em.getTransaction().commit();
