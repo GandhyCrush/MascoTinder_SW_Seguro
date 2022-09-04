@@ -35,15 +35,16 @@ public class Preferencias implements Serializable{
 	@Column(name = "edadMaxima")
 	private int edadMaxima;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
 	private Mascota mascota;
 	
 	public Preferencias() {
 		
 	}
 
-	public Preferencias(Especie especie, Sexo sexo, int edadMinima, int edadMaxima) {
+	public Preferencias(Mascota mascota, Especie especie, Sexo sexo, int edadMinima, int edadMaxima) {
 		super();
+		this.mascota = mascota;
 		this.especie = especie;
 		this.sexo = sexo;
 		this.edadMinima = edadMinima;
@@ -84,6 +85,10 @@ public class Preferencias implements Serializable{
 
 	public void setEdadMaxima(int edadMaxima) {
 		this.edadMaxima = edadMaxima;
+	}
+	
+	public Mascota getMascota() {
+		return mascota;
 	}
 
 	@Override

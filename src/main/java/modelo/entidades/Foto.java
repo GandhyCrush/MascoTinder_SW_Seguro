@@ -14,13 +14,17 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "foto")
 public class Foto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idFoto;
 	@Column(name = "url")
 	private String url;
 	@JoinColumn(name = "fk_img_mascota")
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
 	private Mascota mascota;
 	
 	public Foto() {

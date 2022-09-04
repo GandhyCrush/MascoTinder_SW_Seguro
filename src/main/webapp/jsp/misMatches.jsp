@@ -7,93 +7,73 @@
 <meta charset="UTF-8">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-	crossorigin="anonymous">
+	rel="stylesheet">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/matches.css">
+	href="${pageContext.request.contextPath}/css/misMascotasStyles.css">
 <title>Lista de Matches</title>
 </head>
 <body>
 
 	<%@include file="../templates/banner_superior.html"%>
 
-	<div class="screen-margin">
+
+	<div style="margin: 60px 150px;">
 		<h1 class="display-6 text-muted">
-			<strong>Matches para "Mascota"</strong>
+			<strong>Matches para ${mascota.nombre}</strong>
 		</h1>
-		<div class="row">
-			<div class="d-flex justify-content-evenly">
-				<div class="col-md-6 col-lg-4">
-					<div class="card my-3">
-						<img src="https://picsum.photos/400/280" class="card-image-top"
-							alt="thumbnail">
+		<div class="container m-3">
 
-						<div class="card-body">
-							<h3 class="card-title text-wrap">Mascota1</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Etiam purus est, malesuada ut ultrices quis, dictum ac risus.
-								Mauris fringilla vehicula finibus.</p>
-							<a href="#"
-								class="nav-link active text-primary text-end fw-bold m-2">Mensajes</a>
+			<div class="misMascotas">
+
+				<!-- MASCOTA 1 -->
+				<c:forEach items="${matches}" var="m">
+					<div id="mid${m.idMascota}" class="tinder--card">
+						<div id="m${m.idMascota}" class="carousel slide"
+							data-bs-ride="carousel">
+							<div class="carousel-indicators">
+								<button type="button" data-bs-target="#m${m.idMascota}"
+									data-bs-slide-to="0" class="active" aria-current="true"
+									aria-label="Slide 1"></button>
+								<button type="button" data-bs-target="#m${m.idMascota}"
+									data-bs-slide-to="1" aria-label="Slide 2"></button>
+								<button type="button" data-bs-target="#m${m.idMascota}"
+									data-bs-slide-to="2" aria-label="Slide 3"></button>
+							</div>
+							<button class="carousel-control-prev" type="button"
+								data-bs-target="#m${m.idMascota}" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button"
+								data-bs-target="#m${m.idMascota}" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
+							<div class="carousel-inner">
+								<div class="carousel-item  active" data-bs-interval="100000000">
+									<img src="${m.fotos[0].url}">
+								</div>
+								<div class="carousel-item" data-bs-interval="100000000">
+									<img src="${m.fotos[1].url}">
+								</div>
+								<div class="carousel-item" data-bs-interval="100000000">
+									<img src="${m.fotos[2].url}">
+								</div>
+							</div>
 						</div>
+						<h3>${m.nombre}</h3>
+						<p>${m.descripcion}</p>
+						<a href="${pageContext.request.contextPath}/MensajesController?idMatchMascota=${m.idMascota}"
+							class="nav-link active text-primary text-end fw-bold me-3 mt-3">Mensajes</a>
 					</div>
-				</div>
+				</c:forEach>
 
-				<div class="col-md-6 col-lg-4">
-					<div class="card my-3">
-						<img src="https://picsum.photos/400/280" class="card-image-top"
-							alt="thumbnail">
 
-						<div class="card-body">
-							<h3 class="card-title text-wrap">Mascota2</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Etiam purus est, malesuada ut ultrices quis, dictum ac risus.
-								Mauris fringilla vehicula finibus.</p>
-							<a href="#"
-								class="nav-link active text-primary text-end fw-bold m-2">Mensajes</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="d-flex justify-content-evenly">
-				<div class="col-md-6 col-lg-4">
-					<div class="card my-3">
-						<img src="https://picsum.photos/400/280" class="card-image-top"
-							alt="thumbnail">
-
-						<div class="card-body">
-							<h3 class="card-title text-wrap">Mascota3</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Etiam purus est, malesuada ut ultrices quis, dictum ac risus.
-								Mauris fringilla vehicula finibus.</p>
-							<a href="#"
-								class="nav-link active text-primary text-end fw-bold m-2">Mensajes</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="card my-3">
-						<img src="https://picsum.photos/400/280" class="card-image-top"
-							alt="thumbnail">
-
-						<div class="card-body">
-							<h3 class="card-title text-wrap">Mascota4</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Etiam purus est, malesuada ut ultrices quis, dictum ac risus.
-								Mauris fringilla vehicula finibus.</p>
-							<a href="#"
-								class="nav-link active text-primary text-end fw-bold m-2">Mensajes</a>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 
 	</div>
-
 </body>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </html>

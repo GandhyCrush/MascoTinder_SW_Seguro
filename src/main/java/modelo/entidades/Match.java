@@ -22,7 +22,7 @@ public class Match implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMatch;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "mascotapretendiente", referencedColumnName = "idmascota")
 	private Mascota mascotaPretendiente;
 	
@@ -31,7 +31,7 @@ public class Match implements Serializable{
 	
 	@Column(name = "isMatch")
 	private boolean match;
-	//private Fecha fecha;
+
 	
 	public Match() {
 		

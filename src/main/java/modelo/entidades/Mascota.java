@@ -13,13 +13,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-@Entity(name = "mascota")
 
+@Entity(name = "mascota")
 public class Mascota implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -47,10 +45,13 @@ public class Mascota implements Serializable{
 	//claves foraneas
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
 	private List<Foto> fotos;
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "mascota")
+	
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "mascota")
 	private Preferencias preferencias;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Persona propietario;
+	
 	@OneToMany(mappedBy = "mascotaPretendida")
 	private List<Match> matches;
 	
@@ -58,9 +59,10 @@ public class Mascota implements Serializable{
 		
 	}
 
-	public Mascota(String nombre, Especie especie, Sexo sexo, int edad, Persona propietario) {
+	public Mascota(String nombre, String descripcion, Especie especie, Sexo sexo, int edad, Persona propietario) {
 		super();
 		this.nombre = nombre;
+		this.descripcion = descripcion;
 		this.especie = especie;
 		this.sexo = sexo;
 		this.edad = edad;
@@ -126,7 +128,7 @@ public class Mascota implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Mascota: " + this.nombre + "(" + this.especie + ")"+ this.fotos;
+		return "Mascota: " + this.nombre + "(" + this.especie + ")"+ this.fotos + this.preferencias;
 	}
 	
 	

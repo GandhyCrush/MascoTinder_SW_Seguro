@@ -1,24 +1,39 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+@Entity(name = "mensaje")
 public class Mensaje implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMensaje;
-	private int idEmisor;
-	private int idReceptor;
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "emisor", referencedColumnName = "idPersona")
+	private Persona emisor;
+	@ManyToOne
+	private Persona receptor;
+	@Column(name = "mensaje")
 	private String mensaje;
-	//private Fecha fecha;
 	
 	public Mensaje() {
 		
 	}
 	
-	public Mensaje(int idEmisor, int idReceptor, String mensaje) {
+	public Mensaje(Persona emisor, Persona receptor, String mensaje) {
 		super();
-		this.idEmisor = idEmisor;
-		this.idReceptor = idReceptor;
+		this.emisor = emisor;
+		this.receptor = receptor;
 		this.mensaje = mensaje;
 	}
 	
@@ -26,20 +41,33 @@ public class Mensaje implements Serializable{
 		return idMensaje;
 	}
 	
-	public int getIdEmisor() {
-		return idEmisor;
+	public Persona getEmisor() {
+		return emisor;
 	}
 	
-	public int getIdReceptor() {
-		return idReceptor;
+	public Persona getReceptor() {
+		return receptor;
 	}
 	
 	public String getMensaje() {
 		return mensaje;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mensaje other = (Mensaje) obj;
+		return Objects.equals(emisor, other.emisor) && idMensaje == other.idMensaje
+				&& Objects.equals(mensaje, other.mensaje) && Objects.equals(receptor, other.receptor);
+	}
+
 	@Override
 	public String toString() {
-		return "Mensaje [idEmisor=" + idEmisor + ", idReceptor=" + idReceptor + ", mensaje=" + mensaje + "]";
+		return "Mensaje [idEmisor=" + emisor + ", idReceptor=" + receptor + ", mensaje=" + mensaje + "]";
 	}
 }

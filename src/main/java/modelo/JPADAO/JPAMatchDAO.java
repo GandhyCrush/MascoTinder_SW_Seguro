@@ -38,6 +38,7 @@ public class JPAMatchDAO extends JPAGenericDAO<Match, Integer> implements MatchD
 
 		Query miMascotaQuery = this.em.createQuery(miMascotaJPQL);
 		Query miPretendienteQuery = this.em.createQuery(miPretendienteJPQL);
+		
 		miMascotaQuery.setParameter("idMiMascota", idMiMascota);
 		miPretendienteQuery.setParameter("idMascotaPretendiente", idMascotaPretendiente);
 		Mascota miMascota = (Mascota) miMascotaQuery.getSingleResult();
@@ -48,15 +49,15 @@ public class JPAMatchDAO extends JPAGenericDAO<Match, Integer> implements MatchD
 	}
 
 	public List<Mascota> getMatches(int idMiMascota) {
-		String sentenciaSQL = "SELECT * from MASCOTA where idmascota in (SELECT "
-				+ "    CASE (?) "
-				+ "    WHEN MASCOTAPRETENDIDA_IDMASCOTA THEN mascotapretendiente "
-				+ "    WHEN mascotapretendiente THEN MASCOTAPRETENDIDA_IDMASCOTA "
-				+ "    END "
-				+ "FROM matchtable where ismatch = 1)";
-		Query consultaNativa = em.createNativeQuery(sentenciaSQL, Mascota.class);
-		consultaNativa.setParameter(1, idMiMascota);
-		return consultaNativa.getResultList();
+		String sentenciaJPQL = "SELECT m from mascota m where m.idMascota in (SELECT "
+				+ "ma.mascotaPretendida.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendiente.idMascota =:par_idMiMascota) or m.idMascota in"
+				+ " (SELECT ma.mascotaPretendiente.idMascota from matchTable ma where ma.match = true and ma.mascotaPretendida.idMascota =:par_idMiMascota )";
+		
+		Query query = this.em.createQuery(sentenciaJPQL);
+		query.setParameter("par_idMiMascota", idMiMascota);
+		@SuppressWarnings("unchecked")
+		List<Mascota> resultado = query.getResultList();
+		return resultado;
 	}
 
 }

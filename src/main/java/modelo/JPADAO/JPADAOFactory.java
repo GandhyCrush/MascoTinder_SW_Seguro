@@ -3,7 +3,9 @@ package modelo.JPADAO;
 import modelo.dao.DAOFactory;
 import modelo.dao.MascotaDAO;
 import modelo.dao.MatchDAO;
+import modelo.dao.MensajeDAO;
 import modelo.dao.PersonaDAO;
+import modelo.dao.PreferenciasDAO;
 
 public class JPADAOFactory extends DAOFactory{
 
@@ -22,4 +24,12 @@ public class JPADAOFactory extends DAOFactory{
 		return new JPAMatchDAO();
 	}
 
+	public PreferenciasDAO getPreferenciasDAO() {
+		return new JPAPreferenciaDAO();
+	}
+
+	@Override
+	public MensajeDAO getMensajeDAO() {
+		return new JPAMensajeDAO();
+	}
 }
