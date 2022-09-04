@@ -5,18 +5,17 @@ import java.util.List;
 import javax.persistence.Query;
 
 import modelo.dao.MensajeDAO;
-import modelo.entidades.Mascota;
 import modelo.entidades.Mensaje;
 
 public class JPAMensajeDAO extends JPAGenericDAO<Mensaje, Integer> implements MensajeDAO {
 
-	public JPAMensajeDAO(Class<Mensaje> persistenceClass) {
+	public JPAMensajeDAO() {
 		super(Mensaje.class);
 	}
 
 	@Override
 	public List<Mensaje> getMensajes(int idEmisor, int idReceptor) {
-		String sentenciaJPQL = "SELECT m from mensaje m where m.emisor.idPersona = :par_idEmisor and"
+		String sentenciaJPQL = "SELECT m from mensaje m where m.emisor.idPersona = :par_idEmisor and "
 				+ "m.receptor.idPersona = :par_idReceptor";
 		
 		Query query = this.em.createQuery(sentenciaJPQL);

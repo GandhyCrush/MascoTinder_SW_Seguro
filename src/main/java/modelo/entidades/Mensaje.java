@@ -1,6 +1,8 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,18 +41,31 @@ public class Mensaje implements Serializable{
 		return idMensaje;
 	}
 	
-	public Persona getIdEmisor() {
+	public Persona getEmisor() {
 		return emisor;
 	}
 	
-	public Persona getIdReceptor() {
+	public Persona getReceptor() {
 		return receptor;
 	}
 	
 	public String getMensaje() {
 		return mensaje;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mensaje other = (Mensaje) obj;
+		return Objects.equals(emisor, other.emisor) && idMensaje == other.idMensaje
+				&& Objects.equals(mensaje, other.mensaje) && Objects.equals(receptor, other.receptor);
+	}
+
 	@Override
 	public String toString() {
 		return "Mensaje [idEmisor=" + emisor + ", idReceptor=" + receptor + ", mensaje=" + mensaje + "]";

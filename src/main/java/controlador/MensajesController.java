@@ -1,7 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,32 +20,22 @@ import modelo.entidades.Persona;
 @WebServlet("/MensajesController")
 public class MensajesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private Persona usuario;
+	private Persona matchPropitario;
     public MensajesController() {
         super();
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Persona usuario = (Persona) session.getAttribute("usuarioLogeado");
+		procesarSolicitud(request, response);
 		
-		int idMatchMascota = Integer.parseInt(request.getParameter("idMatchMascota"));
-		
-		Mascota matchMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMatchMascota);
-		
-		List<Mensaje> mensajesEnviados = DAOFactory.getFactory().getMensajeDAO().getMensajes(usuario.getIdPersona(), matchMascota.getPropietario().getIdPersona());
-		List<Mensaje> mensajesRecibidos = DAOFactory.getFactory().getMensajeDAO().getMensajes(matchMascota.getPropietario().getIdPersona(), usuario.getIdPersona());
-		
-		List<Mensaje> conversacion = fusionarListas(mensajesEnviados, mensajesRecibidos);
-		ordenarMensajes(conversacion);
-		
-		request.setAttribute("mensajesRecibidos", mensajesRecibidos);
-		request.setAttribute("conversacion", conversacion);
-		request.getRequestDispatcher("/jsp/mensajes.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Mensaje newMensaje = new Mensaje(usuario,matchPropitario,request.getParameter("mensaje"));
+		DAOFactory.getFactory().getMensajeDAO().create(newMensaje);
+		procesarSolicitud(request, response);
 	}
 
 	private void ordenarMensajes(List<Mensaje> mensajes){
@@ -63,5 +52,23 @@ public class MensajesController extends HttpServlet {
 		}
 		
 		return mensajesRecibidos;
+	}
+	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		usuario = (Persona) session.getAttribute("usuarioLogeado");
+		
+		int idMatchMascota = Integer.parseInt(request.getParameter("idMatchMascota"));	
+		
+		Mascota matchMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMatchMascota);
+		matchPropitario =  matchMascota.getPropietario();
+		
+		List<Mensaje> mensajesEnviados = DAOFactory.getFactory().getMensajeDAO().getMensajes(usuario.getIdPersona(), matchPropitario.getIdPersona());
+		List<Mensaje> mensajesRecibidos = DAOFactory.getFactory().getMensajeDAO().getMensajes(matchPropitario.getIdPersona(), usuario.getIdPersona());
+		List<Mensaje> conversacion = fusionarListas(mensajesEnviados, mensajesRecibidos);
+		ordenarMensajes(conversacion);		
+		request.setAttribute("idUsuario", usuario.getIdPersona());
+		request.setAttribute("conversacion", conversacion);
+		request.setAttribute("idMatchMascota", idMatchMascota);
+		request.getRequestDispatcher("/jsp/mensajes.jsp").forward(request, response);
 	}
 }

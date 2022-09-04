@@ -40,41 +40,51 @@
 		<div class="d-flex justify-content-center">
 			<div class="mt-3 border border-dark shadow p-3 bg-body rounded"
 				style="width: 700px; height: 350px;">
+				<c:forEach items="${conversacion}" var="con">
+					<c:choose>
+						<c:when test="${con.emisor.idPersona == idUsuario}">
+							<!-- Mensaje enviado -->
+							<div class="align-message-right">
+								<p class="pt-2 px-2">${con.mensaje}</p>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<!-- Mensaje recibido -->
+							<div class="align-message-left">
+								<p class="pt-2 px-2">${con.mensaje}</p>
+							</div>
+						</c:otherwise>
+					</c:choose>
 
-				<!-- Mensaje recibido -->
-				<div class="align-message-left">
-					<p class="pt-2 px-2">Lorem ipsum dolor sit amet, consectetur
-						adipiscing elit. Vivamus scelerisque laoreet consequat.</p>
-				</div>
+
+				</c:forEach>
 
 
-				<!-- Mensaje enviado -->
-				<div class="align-message-right">
-					<p class="pt-2 px-2">Cras et placerat erat. Pellentesque
-						pulvinar accumsan odio, et ultrices eros sodales tempus. Donec dui
-						ante, fermentum ac posuere nec, cursus sed neque. Praesent a sem
-						sem.</p>
-				</div>
+
+
 
 			</div>
 		</div>
 		<div class="d-flex justify-content-center">
-			<form method="post" action="PreferenciasController">
+			<form method="post" action="MensajesController">
 				<div class="d-flex flex-row justify-content-evenly m-3"
 					style="width: 700px;">
 
 					<input type="text" class="form-control border border-dark shadow"
-						style="width: 500px; height: 50px;" placeholder="Mensaje">
+						style="width: 500px; height: 50px;" placeholder="Mensaje"
+						name="mensaje"> <input type="hidden" name="idMatchMascota"
+						value="${idMatchMascota}">
 
 					<button type="submit" class="btn"
 						style="background-color: rgb(129, 195, 253); width: 100px;">Enviar</button>
-					<button type="submit" class="btn">
-						<img
-							src="https://img.icons8.com/ios-glyphs/30/000000/refresh--v1.png" />
-					</button>
 				</div>
 
 			</form>
+			<a
+				href="${pageContext.request.contextPath}/MensajesController?idMatchMascota=${idMatchMascota}"
+				class="btn"> <img
+				src="https://img.icons8.com/ios-glyphs/30/000000/refresh--v1.png" />
+			</a>
 		</div>
 
 
