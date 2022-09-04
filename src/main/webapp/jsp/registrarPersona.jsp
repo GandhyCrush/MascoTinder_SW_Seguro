@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="../RegistrarPersonaController">
+		<form method="post" action="RegistrarPersonaController">
 			<h1>Registro MascoTinder</h1>
 			<div class="img"><img src="https://img.icons8.com/cotton/64/000000/dog-heart--v3.png" /></div> 
 			<div class="form-group">

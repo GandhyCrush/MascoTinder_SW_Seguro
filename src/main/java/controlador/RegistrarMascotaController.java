@@ -25,6 +25,7 @@ import modelo.entidades.Especie;
 import modelo.entidades.Foto;
 import modelo.entidades.Mascota;
 import modelo.entidades.Persona;
+import modelo.entidades.Preferencias;
 import modelo.entidades.Sexo;
 
 @WebServlet("/RegistrarMascotaController")
@@ -66,9 +67,10 @@ public class RegistrarMascotaController extends HttpServlet {
 			fotos.add(new Foto(UploadFotos(img2), nuevaMascota));
 			fotos.add(new Foto(UploadFotos(img3), nuevaMascota));
 			nuevaMascota.setFotos(fotos);
+			nuevaMascota.setPreferencias(new Preferencias(nuevaMascota, Especie.PERRO, Sexo.MACHO, 1, 15));
 			DAOFactory.getFactory().getMascotaDAO().create(nuevaMascota);
 		}
-		request.getRequestDispatcher("/PreferenciasController?idMiMascota="+ nuevaMascota.getIdMascota()).forward(request, response);
+		request.getRequestDispatcher("/MisMascotasController").forward(request, response);
 	}
 
 	private String UploadFotos(Part part) throws ServletException, IOException {
