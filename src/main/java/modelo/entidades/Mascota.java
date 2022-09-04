@@ -49,7 +49,7 @@ public class Mascota implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "mascota")
 	private Preferencias preferencias;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Persona propietario;
 	
 	@OneToMany(mappedBy = "mascotaPretendida")
@@ -59,9 +59,10 @@ public class Mascota implements Serializable{
 		
 	}
 
-	public Mascota(String nombre, Especie especie, Sexo sexo, int edad, Persona propietario) {
+	public Mascota(String nombre, String descripcion, Especie especie, Sexo sexo, int edad, Persona propietario) {
 		super();
 		this.nombre = nombre;
+		this.descripcion = descripcion;
 		this.especie = especie;
 		this.sexo = sexo;
 		this.edad = edad;

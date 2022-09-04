@@ -63,7 +63,7 @@
 						</div>
 						<h3>${m.nombre}</h3>
 						<p>${m.descripcion}</p>
-						<a href="${pageContext.request.contextPath}/MensajesController"
+						<a href="${pageContext.request.contextPath}/MensajesController?idMatchMascota=${m.idMascota}"
 							class="nav-link active text-primary text-end fw-bold me-3 mt-3">Mensajes</a>
 					</div>
 				</c:forEach>
