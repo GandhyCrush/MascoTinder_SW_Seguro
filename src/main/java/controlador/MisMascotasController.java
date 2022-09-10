@@ -34,8 +34,8 @@ public class MisMascotasController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Persona personaAutorizada = (Persona) session.getAttribute("usuarioLogeado");
-		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMisMascotas(personaAutorizada);
-		request.setAttribute("mascotas", mascotas);
+		List<Mascota> misMascotas = personaAutorizada.getMascotas();
+		request.setAttribute("misMascotas", misMascotas);
 		request.getRequestDispatcher("/jsp/misMascotas.jsp").forward(request, response);
 	}
 

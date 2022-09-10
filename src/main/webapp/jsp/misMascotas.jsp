@@ -32,7 +32,7 @@
 
 		<div class="misMascotas">
 
-			<c:forEach items="${mascotas}" var="m">
+			<c:forEach items="${misMascotas}" var="m">
 				<div id="mid${m.idMascota}" class="tinder--card">
 					<div id="m${m.idMascota}" class="carousel slide"
 						data-bs-ride="carousel">

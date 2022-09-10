@@ -53,6 +53,15 @@ public class Persona implements Serializable{
 	public int getIdPersona() {
 		return idPersona;
 	}
+	
+
+	public List<Mascota> getMascotas() {
+		return mascotas;
+	}
+
+	public void setMascotas(List<Mascota> mascotas) {
+		this.mascotas = mascotas;
+	}
 
 	public String getNombre() {
 		return nombre;

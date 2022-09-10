@@ -99,10 +99,10 @@
 			</div>
 
 			<div class="tinder--buttons">
-				<button id="nope">
+				<button id="noLike">
 					<i class="fa fa-remove"></i>
 				</button>
-				<button id="love">
+				<button id="like">
 					<i class="fa fa-heart"></i>
 				</button>
 			</div>
@@ -120,50 +120,52 @@
 <script>
 		var tinderContainer = document.querySelector('.tinder');
 		var allCards = document.querySelectorAll('.tinder--card');
-		var nope = document.getElementById('nope');
-		var love = document.getElementById('love');
-		var url = './LikeNoLikeController?idCard=';
+		var noLike = document.getElementById('noLike');
+		var like = document.getElementById('like');
+		var idCard = '';
 		function initCards(card, index) {
-			var newCards = document
-					.querySelectorAll('.tinder--card:not(.removed)');
+			var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
+			addTranslateCard(newCards);
+			tinderContainer.classList.add('loaded');
+		}
+		function addTranslateCard(newCards){
 			newCards.forEach(function(card, index) {
 				card.style.zIndex = allCards.length - index;
 				card.style.transform = 'scale(' + (20 - index) / 20
 						+ ') translateY(-' + 30 * index + 'px)';
 				card.style.opacity = (10 - index) / 10;
 			});
-			tinderContainer.classList.add('loaded');
 		}
-		initCards();
-		function createButtonListener(love) {
+		function createButtonListener(isLike) {
 			return function(event) {
-				var cards = document
-						.querySelectorAll('.tinder--card:not(.removed)');
-				var moveOutWidth = document.body.clientWidth * 1.5;
+				var cards = document.querySelectorAll('.tinder--card:not(.removed)');
 				if (!cards.length)
 					return false;
 				var card = cards[0];
-				console.log(card);
 				getIdCard(card.id);
 				card.classList.add('removed');
-				if (love) {
-					card.style.transform = 'translate(' + moveOutWidth
-							+ 'px, -100px) rotate(-30deg)';
-				} else {
-					card.style.transform = 'translate(-' + moveOutWidth
-							+ 'px, -100px) rotate(30deg)';
-				}
-				sendLike(love);
-				initCards();
+				animationCard(card,isLike);
 				event.preventDefault();
 			};
 		}
-		function sendLike(like) {
+		function animationCard(card, isLike){
+			var moveOutWidth = document.body.clientWidth * 1.5;
+			if (isLike) {
+				card.style.transform = 'translate(' + moveOutWidth
+						+ 'px, -100px) rotate(-30deg)';
+			} else {
+				card.style.transform = 'translate(-' + moveOutWidth
+						+ 'px, -100px) rotate(30deg)';
+			}
+			sendPostLike(isLike);
+			initCards();
+		}
+		function sendPostLike(like) {
 			const http = new XMLHttpRequest();
-			url += '&like='+like;
+			var url = './LikeNoLikeController?idCard='+ idCard+'&like='+like;
 			http.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					//console.log('exito');
+					console.log('exito');
 				}
 			}
 			http.open('POST', url, true);
@@ -171,12 +173,13 @@
 			
 		}
 		function getIdCard(cardId) {
-			url += cardId;
+			idCard = cardId;
 		}
-		var nopeListener = createButtonListener(false);
-		var loveListener = createButtonListener(true);
-		nope.addEventListener('click', nopeListener);
-		love.addEventListener('click', loveListener);
+		initCards();
+		var noLikeListener = createButtonListener(false);
+		var likeListener = createButtonListener(true);
+		noLike.addEventListener('click', noLikeListener);
+		like.addEventListener('click', likeListener);
 	</script>
 </body>
 
