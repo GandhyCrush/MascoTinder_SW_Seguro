@@ -18,13 +18,13 @@ public class MisMatchesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public MisMatchesController() {
-
+		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
-		List<Mascota> matches = new ArrayList<Mascota>();
+		List<Mascota> matches = new ArrayList<>();
 		matches = DAOFactory.getFactory().getMatchDAO().getMatches(idMiMascota);
 		Mascota mascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
 		request.setAttribute("matches", matches);
@@ -35,7 +35,7 @@ public class MisMatchesController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		//En esta instancia no se manda ninguna solicitud por POST
 	}
 
 }
