@@ -26,17 +26,9 @@ public class PreferenciasController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
 		
-		//Mascota miMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
+		Preferencias preferenciasMiMascota = DAOFactory.getFactory().getPreferenciasDAO().getPreferenciasByIdMascota(idMiMascota);
 		
-		Preferencias preferencias = DAOFactory.getFactory().getPreferenciasDAO().getPreferenciasByIdMascota(idMiMascota);
-		
-		if (preferencias != null) {
-			request.setAttribute("preferenciasMiMascota", preferencias);
-		}
-		else {
-			request.setAttribute("preferenciasMiMascota", new Preferencias(null, Especie.PERRO, Sexo.HEMBRA, 1, 1));
-		}
-		
+		request.setAttribute("preferenciasMiMascota", preferenciasMiMascota);
 		request.getRequestDispatcher("/jsp/preferencias.jsp").forward(request, response);
 	}
 
@@ -48,18 +40,13 @@ public class PreferenciasController extends HttpServlet {
 		
 		Preferencias preferenciasMiMascota = DAOFactory.getFactory().getPreferenciasDAO().getPreferenciasByIdMascota(idMiMascota);
 		
-		if (preferenciasMiMascota != null) {
-			preferenciasMiMascota.setEspecie(Especie.valueOf(especie));
-			preferenciasMiMascota.setSexo(Sexo.valueOf(sexo));
-			preferenciasMiMascota.setEdadMinima(edadMinima);
-			preferenciasMiMascota.setEdadMaxima(edadMaxima);
-			
-			DAOFactory.getFactory().getPreferenciasDAO().update(preferenciasMiMascota);
-		}else {
-			Mascota miMascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
-			Preferencias nuevasPreferenciasMiMascota = new Preferencias(miMascota, Especie.valueOf(especie), Sexo.valueOf(sexo), edadMinima, edadMaxima);
-			DAOFactory.getFactory().getPreferenciasDAO().create(nuevasPreferenciasMiMascota);
-		}
+		preferenciasMiMascota.setEspecie(Especie.valueOf(especie));
+		preferenciasMiMascota.setSexo(Sexo.valueOf(sexo));
+		preferenciasMiMascota.setEdadMinima(edadMinima);
+		preferenciasMiMascota.setEdadMaxima(edadMaxima);
+		
+		DAOFactory.getFactory().getPreferenciasDAO().update(preferenciasMiMascota);
+		
 		request.getRequestDispatcher("/MisMascotasController").forward(request, response);
 	}
 
