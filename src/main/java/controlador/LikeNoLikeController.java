@@ -25,14 +25,10 @@ public class LikeNoLikeController extends HttpServlet {
 			throws ServletException, IOException {
 		idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
 		Preferencias preferenciasMiMascota = DAOFactory.getFactory().getPreferenciasDAO().getPreferenciasByIdMascota(idMiMascota);
-		if (existePreferencias(preferenciasMiMascota)) {
-			List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferenciasMiMascota);
-			request.setAttribute("mascotas", mascotas);
-			request.setAttribute("idMiMascota", idMiMascota);
-			mostrarVista(request, response);
-		}else {
-			request.getRequestDispatcher("/PreferenciasController").forward(request, response);
-		}
+		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferenciasMiMascota);
+		request.setAttribute("mascotas", mascotas);
+		request.setAttribute("idMiMascota", idMiMascota);
+		mostrarVista(request, response);
 		
 	}
 
@@ -64,9 +60,6 @@ public class LikeNoLikeController extends HttpServlet {
 			DAOFactory.getFactory().getMatchDAO().update(matchExistente);
 		}
 		mostrarVista(request, response);
-	}
-	private boolean existePreferencias(Preferencias preferences) {
-		return preferences != null;
 	}
 
 }
