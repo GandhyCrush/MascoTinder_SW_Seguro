@@ -27,7 +27,7 @@
 				<label for="input" class="control-label">Nombre de Usuario</label><i class="bar"></i>
 			</div>
 			<div class="form-group">
-				<input id="password" type="password" required="required" name="clave" minlength="5" 
+				<input id="password" type="password" required="required" name="clave" minlength="12" 
 				title="Tamaño mínimo: 12 caráteres"  /> 
 				<label for="input" class="control-label">Contraseña</label><i class="bar"></i>
 			</div>
