@@ -36,7 +36,7 @@ public class RegistrarMascotaController extends HttpServlet {
 	private File uploads = new File(pathContext);
 	private String[] extensionesPermitidas = { ".png", ".jpg", ".jpeg" };
 	private List<Foto> fotos = new ArrayList<Foto>();
-	private String directorioRaizImg = "http://localhost:8080/MascoTinder_Proyecto/imgs/";
+	private String directorioRaizImg = "testing-deploy-qs1f.onrender.com/imgs/";
 
 	public RegistrarMascotaController() {
 		super();
