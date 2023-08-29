@@ -32,7 +32,7 @@ public class Persona implements Serializable{
 	@Column(name = "clave")
 	private String clave;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "propietario")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "propietario")
 	private List<Mascota> mascotas;
 	
 	@OneToMany(mappedBy = "receptor")
