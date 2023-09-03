@@ -34,7 +34,7 @@ public class RegistrarMascotaController extends HttpServlet {
 	private String pathContext = "";
 	private File uploads = new File(pathContext);
 	private String[] extensionesPermitidas = { ".png", ".jpg", ".jpeg" };
-	private List<Foto> fotos = new ArrayList<Foto>();
+	private List<Foto> fotos = new ArrayList<>();
 	private String directorioRaizImg = "https://testing-deploy-qs1f.onrender.com/imgs/";
 
 	public RegistrarMascotaController() {
