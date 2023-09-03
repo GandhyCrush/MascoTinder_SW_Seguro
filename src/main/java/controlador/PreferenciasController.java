@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.DAOFactory;
 import modelo.entidades.Especie;
-import modelo.entidades.Mascota;
 import modelo.entidades.Preferencias;
 import modelo.entidades.Sexo;
 
