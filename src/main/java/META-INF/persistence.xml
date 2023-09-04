@@ -14,12 +14,9 @@
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://root:LL1e2QW3FmyBFqTRTRGD@containers-us-west-178.railway.app:6245/railway" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password"
-				value="LL1e2QW3FmyBFqTRTRGD" />
-			<property name="javax.persistence.jdbc.driver"
-				value="com.mysql.cj.jdbc.Driver" />
-			<property name="eclipselink.ddl-generation"
-				value="create-or-extend-tables" />
+			<property name="javax.persistence.jdbc.password" value="LL1e2QW3FmyBFqTRTRGD" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 		</properties>
 	</persistence-unit>
 </persistence>
