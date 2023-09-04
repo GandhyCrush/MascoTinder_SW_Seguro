@@ -9,29 +9,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.DAOFactory;
 import modelo.entidades.Persona;
-
+import utils.PasswordEncryptionUtil;
 
 @WebServlet("/RegistrarPersonaController")
 public class RegistrarPersonaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public RegistrarPersonaController() {
-        super();
-    }
+	public RegistrarPersonaController() {
+		super();
+	}
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher("/jsp/registrarPersona.jsp").forward(request, response);
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String nombre = (String) request.getParameter("nombre");
 		String apellido = (String) request.getParameter("apellido");
 		String username = (String) request.getParameter("username");
 		String clave = (String) request.getParameter("clave");
-		DAOFactory.getFactory().getPersonaDAO().create(new Persona(nombre, apellido, username, clave));
+		String encryptedPassword = PasswordEncryptionUtil.encryptPassword(clave);
+		DAOFactory.getFactory().getPersonaDAO().create(new Persona(nombre, apellido, username, encryptedPassword));
 		request.getRequestDispatcher("/LoginController").forward(request, response);
 	}
 

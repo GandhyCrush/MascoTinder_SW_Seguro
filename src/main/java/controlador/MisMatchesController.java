@@ -1,10 +1,7 @@
 package controlador;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +21,7 @@ public class MisMatchesController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
-		List<Mascota> matches = new ArrayList<>();
+		List<Mascota> matches;
 		matches = DAOFactory.getFactory().getMatchDAO().getMatches(idMiMascota);
 		Mascota mascota = DAOFactory.getFactory().getMascotaDAO().getById(idMiMascota);
 		request.setAttribute("matches", matches);
