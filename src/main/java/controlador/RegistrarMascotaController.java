@@ -34,8 +34,8 @@ public class RegistrarMascotaController extends HttpServlet {
 	private String pathContext = "";
 	private File uploads = new File(pathContext);
 	private String[] extensionesPermitidas = { ".png", ".jpg", ".jpeg" };
-	private List<Foto> fotos = new ArrayList<>();
-	private String directorioRaizImg = "https://testing-deploy-qs1f.onrender.com/imgs/";
+	private List<Foto> fotos = new ArrayList<Foto>();
+	private String directorioRaizImg = "http://localhost:8080/MascoTinder_Proyecto/imgs/";
 
 	public RegistrarMascotaController() {
 		super();
@@ -71,9 +71,6 @@ public class RegistrarMascotaController extends HttpServlet {
 			nuevaMascota.setFotos(fotos);
 			nuevaMascota.setPreferencias(new Preferencias(nuevaMascota, Especie.PERRO, Sexo.MACHO, 1, 15));
 			DAOFactory.getFactory().getMascotaDAO().create(nuevaMascota);
-			List<Mascota> mascotasActualizadas = propietario.getMascotas();
-			mascotasActualizadas.add(nuevaMascota);
-			propietario.setMascotas(mascotasActualizadas);
 		}
 
 		request.getRequestDispatcher("/MisMascotasController").forward(request, response);
@@ -91,8 +88,7 @@ public class RegistrarMascotaController extends HttpServlet {
 			if (input != null) {
 				File file = new File(uploads, fileName);
 				Path destino = Paths.get(this.pathContext + "/" + file.toPath());
-				if (!Files.exists(destino))
-					Files.copy(input, destino);
+				Files.copy(input, destino);
 				urlResultante = directorioRaizImg + fileName;
 			}
 		} catch (Exception e) {
