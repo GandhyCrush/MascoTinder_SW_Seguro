@@ -88,7 +88,11 @@ public class RegistrarMascotaController extends HttpServlet {
 			if (input != null) {
 				File file = new File(uploads, fileName);
 				Path destino = Paths.get(this.pathContext + "/" + file.toPath());
-				Files.copy(input, destino);
+
+				if (!Files.exists(destino)) {
+					Files.copy(input, destino);
+				}
+
 				urlResultante = directorioRaizImg + fileName;
 			}
 		} catch (Exception e) {
@@ -96,7 +100,6 @@ public class RegistrarMascotaController extends HttpServlet {
 		}
 
 		return urlResultante;
-
 	}
 
 	private boolean extensionValida(String fileName) {
