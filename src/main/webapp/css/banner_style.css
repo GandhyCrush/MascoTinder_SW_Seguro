@@ -1,13 +1,23 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
 .navbar-custom {
 	background: rgb(129, 195, 253);
 	min-height: 100%;
-	padding: 30px;
-	width: 100%;
+	padding: 1rem;
+	flex: 1;
 }
 
-.center-text {
-	padding-left: 6%;
-	padding-right: 15%;
-	margin: auto;
-	vertical-align: middle;
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+}
+
+.text {
+	padding: 0;
+	margin: 0;
 }
