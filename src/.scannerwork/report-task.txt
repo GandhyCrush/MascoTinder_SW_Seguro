@@ -1,0 +1,6 @@
+projectKey=MascoTinder_SW_Seguro
+serverUrl=http://localhost:9000
+serverVersion=9.9.1.69595
+dashboardUrl=http://localhost:9000/dashboard?id=MascoTinder_SW_Seguro
+ceTaskId=AYpX98616OLjOOiFvDfX
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYpX98616OLjOOiFvDfX
