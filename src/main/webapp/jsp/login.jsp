@@ -22,8 +22,8 @@
 				<label for="input" class="control-label">Nombre de Usuario</label><i class="bar"></i>
 			</div>
 			<div class="form-group">
-				<input id="password" type="password" required="required" name="clave" minlength="5" 
-				title="Tamaño mínimo: 12 caráteres"  /> 
+				<input id="password" type="password" required="required" name="clave" minlength="5" maxlength="16" 
+				title="Tamaño mínimo: 12 caráteres. Tamaño máximo: 16 caracteres"/> 
 				<label for="input" class="control-label">Contraseña</label><i class="bar"></i>
 			</div>
 			<div class="button-container">

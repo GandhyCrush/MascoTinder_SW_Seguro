@@ -31,13 +31,14 @@
 						<label for="nombre" class="form-label text-muted h6">Nombre</label>
 						<input type="text" class="form-control text-light" id="nombre"
 							name="nombre" style="background-color: rgb(129, 195, 253);"
-							required>
+							required pattern="^[a-zA-Z'\-]+(\s+[a-zA-Z'\-]+)*$" maxlength="30" 
+							title="Por favor, ingrese un formato de nombre válido. Se aceptan guiones y apóstrofes (no tildes ni diéresis). El nombre debe comenzar con una letra."/> 
 					</div>
 					<div class="mb-3">
 						<label for="descripcion" class="form-label text-muted h6">Descripción</label>
 						<input type="text" class="form-control text-light"
 							id="descripcion" name="descripcion"
-							style="background-color: rgb(129, 195, 253);" required>
+							style="background-color: rgb(129, 195, 253);" required maxlength="150" title="Por favor, ingrese una descripción (máx: 150 caracteres)">
 					</div>
 
 					<div class="mb-3">
@@ -54,7 +55,7 @@
 						<label for="sexo" class="form-label text-muted h6">Sexo</label> <select
 							class="form-select text-white fw-bold"
 							style="background-color: rgb(129, 195, 253);" id="sexo"
-							name="sexo">
+							name="sexo" required>
 							<option value="HEMBRA">HEMBRA</option>
 							<option value="MACHO">MACHO</option>
 						</select>
