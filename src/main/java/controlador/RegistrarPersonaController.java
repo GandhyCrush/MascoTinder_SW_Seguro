@@ -26,13 +26,18 @@ public class RegistrarPersonaController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String nombre = (String) request.getParameter("nombre");
-		String apellido = (String) request.getParameter("apellido");
-		String username = (String) request.getParameter("username");
-		String clave = (String) request.getParameter("clave");
-		String encryptedPassword = PasswordEncryptionUtil.encryptPassword(clave);
-		DAOFactory.getFactory().getPersonaDAO().create(new Persona(nombre, apellido, username, encryptedPassword));
-		request.getRequestDispatcher("/LoginController").forward(request, response);
+		if (request.getParameter("nombre") != null && request.getParameter("apellido") != null
+				&& request.getParameter("username") != null && request.getParameter("clave") != null) {
+			String nombre = (String) request.getParameter("nombre");
+			String apellido = (String) request.getParameter("apellido");
+			String username = (String) request.getParameter("username");
+			String clave = (String) request.getParameter("clave");
+			String encryptedPassword = PasswordEncryptionUtil.encryptPassword(clave);
+			DAOFactory.getFactory().getPersonaDAO().create(new Persona(nombre, apellido, username, encryptedPassword));
+			request.getRequestDispatcher("/LoginController").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/LoginController").forward(request, response);
+		}
 	}
 
 }

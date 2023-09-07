@@ -35,7 +35,7 @@ public class RegistrarMascotaController extends HttpServlet {
 	private File uploads = new File(pathContext);
 	private String[] extensionesPermitidas = { ".png", ".jpg", ".jpeg" };
 	private List<Foto> fotos = new ArrayList<Foto>();
-	private String directorioRaizImg = "http://localhost:8080/MascoTinder_Proyecto/imgs/";
+	private String directorioRaizImg = "https://testing-deploy-qs1f.onrender.com/imgs/";
 
 	public RegistrarMascotaController() {
 		super();
@@ -43,7 +43,13 @@ public class RegistrarMascotaController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/registrarMascota.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		Persona personaAutorizada = (Persona) session.getAttribute("usuarioLogeado");
+		if (personaAutorizada != null) {
+			request.getRequestDispatcher("jsp/registrarMascota.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/LoginController").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,28 +58,33 @@ public class RegistrarMascotaController extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		String especie = request.getParameter("especie");
 		String sexo = request.getParameter("sexo");
-		int edad = Integer.parseInt(request.getParameter("edad"));
+		if (sexo.equals("null") && especie.equals("null") && request.getParameter("edadMinima").equals("")
+				&& request.getParameter("edadMaxima").equals("")) {
+			request.getRequestDispatcher("/MisMascotasController").forward(request, response);
+		} else {
+			int edad = Integer.parseInt(request.getParameter("edad"));
 
-		HttpSession session = request.getSession();
-		Persona propietario = (Persona) session.getAttribute("usuarioLogeado");
-		Mascota nuevaMascota = new Mascota(nombre, descripcion, Especie.valueOf(especie), Sexo.valueOf(sexo), edad,
-				propietario);
+			HttpSession session = request.getSession();
+			Persona propietario = (Persona) session.getAttribute("usuarioLogeado");
+			Mascota nuevaMascota = new Mascota(nombre, descripcion, Especie.valueOf(especie), Sexo.valueOf(sexo), edad,
+					propietario);
 
-		Part img1 = request.getPart("foto1");
-		Part img2 = request.getPart("foto2");
-		Part img3 = request.getPart("foto3");
+			Part img1 = request.getPart("foto1");
+			Part img2 = request.getPart("foto2");
+			Part img3 = request.getPart("foto3");
 
-		if (validacionExtensiones(img1, img2, img3)) {
-			fotos.add(new Foto(getUrlFoto(img1), nuevaMascota));
-			fotos.add(new Foto(getUrlFoto(img2), nuevaMascota));
-			fotos.add(new Foto(getUrlFoto(img3), nuevaMascota));
+			if (validacionExtensiones(img1, img2, img3)) {
+				fotos.add(new Foto(getUrlFoto(img1), nuevaMascota));
+				fotos.add(new Foto(getUrlFoto(img2), nuevaMascota));
+				fotos.add(new Foto(getUrlFoto(img3), nuevaMascota));
 
-			nuevaMascota.setFotos(fotos);
-			nuevaMascota.setPreferencias(new Preferencias(nuevaMascota, Especie.PERRO, Sexo.MACHO, 1, 15));
-			DAOFactory.getFactory().getMascotaDAO().create(nuevaMascota);
+				nuevaMascota.setFotos(fotos);
+				nuevaMascota.setPreferencias(new Preferencias(nuevaMascota, Especie.PERRO, Sexo.MACHO, 1, 15));
+				DAOFactory.getFactory().getMascotaDAO().create(nuevaMascota);
+			}
+
+			request.getRequestDispatcher("/MisMascotasController").forward(request, response);
 		}
-
-		request.getRequestDispatcher("/MisMascotasController").forward(request, response);
 	}
 
 	private String getUrlFoto(Part part) throws ServletException, IOException {

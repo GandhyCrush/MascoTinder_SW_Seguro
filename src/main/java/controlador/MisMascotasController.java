@@ -17,26 +17,33 @@ import modelo.entidades.Persona;
 @WebServlet("/MisMascotasController")
 public class MisMascotasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public MisMascotasController() {
-        super();
-    }
+	public MisMascotasController() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		procesarSolicitud(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		procesarSolicitud(request, response);
 	}
+
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Persona personaAutorizada = (Persona) session.getAttribute("usuarioLogeado");
-		List<Mascota> misMascotas = DAOFactory.getFactory().getMascotaDAO().getMisMascotas(personaAutorizada);
-		request.setAttribute("misMascotas", misMascotas);
-		request.getRequestDispatcher("/jsp/misMascotas.jsp").forward(request, response);
+		if (personaAutorizada != null) {
+			List<Mascota> misMascotas = DAOFactory.getFactory().getMascotaDAO().getMisMascotas(personaAutorizada);
+			request.setAttribute("misMascotas", misMascotas);
+			request.getRequestDispatcher("/jsp/misMascotas.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/LoginController").forward(request, response);
+		}
+
 	}
 
 }

@@ -17,45 +17,56 @@ import modelo.entidades.Preferencias;
 public class LikeNoLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private int idMiMascota;
+
 	public LikeNoLikeController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
-		Preferencias preferenciasMiMascota = DAOFactory.getFactory().getPreferenciasDAO().getPreferenciasByIdMascota(idMiMascota);
-		List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferenciasMiMascota);
-		request.setAttribute("mascotas", mascotas);
-		request.setAttribute("idMiMascota", idMiMascota);
-		mostrarVista(request, response);
-		
-	}
+		if (request.getParameter("idMiMascota") != null) {
+			idMiMascota = Integer.parseInt(request.getParameter("idMiMascota"));
+			Preferencias preferenciasMiMascota = DAOFactory.getFactory().getPreferenciasDAO()
+					.getPreferenciasByIdMascota(idMiMascota);
+			List<Mascota> mascotas = DAOFactory.getFactory().getMascotaDAO().getMascotas(preferenciasMiMascota);
+			request.setAttribute("mascotas", mascotas);
+			request.setAttribute("idMiMascota", idMiMascota);
+			mostrarVista(request, response);
+		} else {
+			request.getRequestDispatcher("/LoginController").forward(request, response);
+		}
 
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
-		int idMascotaPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
-		if (isLike && idMascotaPretendiente != 0) {
-			controlarMatch(request, response,idMascotaPretendiente);
-		}else if (idMascotaPretendiente == 0) {
-			request.getRequestDispatcher("/PreferenciasController").forward(request, response);
+		if (request.getParameter("idMiMascota") != null) {
+			boolean isLike = Boolean.parseBoolean(request.getParameter("like"));
+			int idMascotaPretendiente = Integer.parseInt(request.getParameter("idCard").toString().split("mid")[1]);
+			if (isLike && idMascotaPretendiente != 0) {
+				controlarMatch(request, response, idMascotaPretendiente);
+			} else if (idMascotaPretendiente == 0) {
+				request.getRequestDispatcher("/PreferenciasController").forward(request, response);
+			}
+		} else {
+			request.getRequestDispatcher("/LoginController").forward(request, response);
 		}
+
 	}
 
 	private void mostrarVista(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("/jsp/likeNolike.jsp").forward(request, response);
 	}
-	
-	private void controlarMatch(HttpServletRequest request,HttpServletResponse response, int idPretendido) throws ServletException, IOException {
-		
+
+	private void controlarMatch(HttpServletRequest request, HttpServletResponse response, int idPretendido)
+			throws ServletException, IOException {
+
 		Match matchExistente = DAOFactory.getFactory().getMatchDAO().isMatch(idPretendido, this.idMiMascota);
-		
+
 		if (matchExistente == null) {
 			DAOFactory.getFactory().getMatchDAO().createMatch(this.idMiMascota, idPretendido);
-		}else {
+		} else {
 			matchExistente.setMatch(true);
 			DAOFactory.getFactory().getMatchDAO().update(matchExistente);
 		}
